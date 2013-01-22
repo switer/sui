@@ -22,14 +22,12 @@
 .sui-btn-nav {
   display: -webkit-box;padding: 7px 15px;
   border-bottom: 1px solid #ADADAD;border-top: 1px solid #ADADAD;
-  background: -webkit-gradient(linear,0 0,0 100%,from(#E1E1E1),to(#C3C7CF));
 }
 
 .sui-btn-nav .sui-btn {
   -webkit-box-flex:1;margin: 0;
-  border-radius: 0;height: 31px;border: 1px solid #ADADAD;text-shadow: 1px 1px white;
-  color: #333;background: -webkit-gradient(linear,0 0,0 100%,from(#F9F9F9),to(#B7B9BE));
-  
+  border-radius: 0;height: 31px;border: 1px solid #ADADAD;
+  text-shadow: 1px 1px white;  
 }
 /*面包屑 on*/
 .sui-btn-nav .sui-btn.sui-on {text-shadow: 1px 1px black;color:white;background: -webkit-gradient(linear,0 0,0 100%,from(#434547),to(#8D8E8E));}
@@ -40,17 +38,20 @@
 .sui-btn-nav .sui-btn.disabled {color:#AAA;}
 
 /*theme*/
-.sui-btn.sui-btn-primary {
+.sui-btn-primary {
   border: 1px solid rgba(0, 0, 0, 0.1);
   color: #333;background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #F8F8F8), color-stop(100%, #E2E2E2));
 }
-.sui-btn.sui-btn-inverse {
+.sui-btn-inverse {
   border: 1px solid rgba(0, 0, 0, 0.3);
   background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #525252), color-stop(100%, #383838));
 }
-.sui-btn.sui-btn-silver {
+.sui-btn-silver {
   border: 1px solid #ADADAD;text-shadow: 1px 1px white;
   color: #333;background: -webkit-gradient(linear,0 0,0 100%,from(#F9F9F9),to(#B7B9BE));
+}
+.sui-nav-silver {
+  background: -webkit-gradient(linear,0 0,0 100%,from(#E1E1E1),to(#C3C7CF));
 }
 /*Button style End*/
 /*Input style begin*/
