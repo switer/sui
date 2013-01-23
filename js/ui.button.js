@@ -8,16 +8,44 @@
     "nav_on" : 'sui-on',
     "button" : '.sui-btn'
   }
+  $.fn.toggle = function  (time, callback) {
+    var $this = this;
+    $this.disabled();
+    if ( time && time !== 0 ) {
+      setTimeout (function () {
+        $this.enabled();
+        callback && callback.apply($this);
+      }, time);
+    }
+  }
+  $.fn.enabled = function () {
+    $(this).removeClass(conf.disabled);
+  }
+  $.fn.disabled = function () {
+    $(this).addClass(conf.disabled)
+  }
+  /**
+  * @return bool 
+  **/
+  $.fn.isdisabled = function () {
+    return $(this).hasClass(conf.disabled);
+  }
+  $.fn.feed = function () {
+    $(this).removeClass(conf.feed_class);
+  }
+  $.fn.unFeed = function () {
+    $(this).addClass(conf.feed_class)
+  }
   /**
   * Button Event
   **/
   $(document).on('click.sui-btn', function (e) {
 
     var $btn = $(e.target);
-        $btn.addClass(conf.feed_class);
+        $btn.feed();
 
     //按钮处于disabled状态
-    if ($btn.hasClass(conf.disabled)) return;
+    if ($btn.isdisabled()) return;
 
     //检查按钮的toggle配置
     var toggle = $btn.attr('data-toggle'),
@@ -26,31 +54,17 @@
 
     //改按钮配置了toggle属性
     if (toggle) {
-
-      //添加disabled状态
-      $btn.addClass(conf.disabled);
-
-      //按自定义的toggle时间来清除disabled
-      setTimeout(function () {
-        //disabled状态根据disabled的时间来定时清除反馈
-        $btn.removeClass(conf.feed_class);
-        //取消disabled状态
-        $btn.removeClass(conf.disabled);
-      }, parseInt(toggle))
+      //disabled开关
+      $btn.toggle(parseInt(toggle));
     }
-    else {
-      //取消默认反馈
-      setTimeout(function () {
-        $btn.removeClass(conf.feed_class);
-      }, conf.feed_time);
-    }
+    //取消默认反馈
+    setTimeout(function () {
+      $btn.removeClass(conf.feed_class);
+    }, conf.feed_time);
 
     if (isNavBtn) {
       $parent.find(conf.button).removeClass(conf.nav_on);
       $btn.addClass(conf.nav_on);
     }
-
-
-
   })
 }(window.$);
