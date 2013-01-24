@@ -7,6 +7,7 @@
 .sui-mg-top {margin-top: 10px!important;}
 .sui-mg-right {margin-right: 10px!important;}
 .sui-mg6 {margin: 6px;}
+.sui-disp-none {display: none;}
 /*Button style Begin*/
 .sui-btn {
   /*layout:padding,margin,display*/
@@ -22,12 +23,11 @@
 .sui-btn-group .sui-btn:last-child {margin-right:0;margin-left: 10px;}
 .sui-btn-group .sui-btn {-webkit-box-flex:1;}
 /*Button navigation*/
-/*default silver*/
+/*default theme silver*/
 .sui-btn-nav {
   display: -webkit-box;padding: 7px 15px;
   border-bottom: 1px solid #ADADAD;border-top: 1px solid #ADADAD;
 }
-
 .sui-btn-nav .sui-btn {
   -webkit-box-flex:1;margin: 0;
   border-radius: 0;height: 31px;border: 1px solid #ADADAD;
@@ -104,11 +104,36 @@
 .sui-inp-group .sui-inp-box:last-child {
   border-bottom: 1px solid #CCC;border-radius: 0 0 5px 5px;
 }
-
+/*Input style End*/
 /*Input Box Theme*/
 .sui-inp-shadow-top {-webkit-box-shadow:0 1px 5px rgba(0, 0, 0, .2) inset;}
 .sui-inp-shadow-bottom {-webkit-box-shadow:0 -1px 5px rgba(0, 0, 0, .2) inset;}
 .sui-inp-shadow-none {-webkit-box-shadow:0 0px 5px rgba(0, 0, 0, .2) inset;}
+/*Input Box Theme End*/
+/*PopBox style*/
+.sui-popbox {
+  position: absolute;top: 0;left: 0;
+  width: 100%;height: 100%;
+}
+.sui-popbox-mask {
+  position: absolute;
+  width: 100%;height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+}
+.sui-popbox-box {
+  position: relative;margin: auto;z-index: 10;
+  width: 80%;height: auto;min-height: 140px;border-radius: 5px;
+  background: #EAEBED;
+}
+.sui-popbox-title {
+  width: 100%;height: 45px;line-height: 45px;
+  border-radius: 3px 3px 0 0;
+  text-align: center;color: white;background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #525252), color-stop(100%, #383838));
+}
+.sui-popbox-content {padding: 10px;}
+/*PopBox style End*/
 
 /*Custom Size*/
 .sui-size-custom {height: 93px;width: 108px;}
+.sui-mg-custom {margin-top: 200px;}
+.sui-w-custom {width: 300px;}
