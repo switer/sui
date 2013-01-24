@@ -11,23 +11,7 @@
 	<script type="text/javascript" src="js/ui.popbox.js"></script>
 	<script type="text/javascript" src="js/ui.input.js"></script>
 	<script type="text/javascript" src="js/ui.button.js"></script>
-	<script type="text/javascript">
-	$(document).on('click.sui-btn', function (e) {
-		var tar = e.target.dataset.target;
-		if (!tar) return;
-			$tar = $("#" + tar);
-		if ($tar.hasClass('sui-disp-none')) {
-			$tar.center();
-			$tar.showPopbox();
-		}
-		else $tar.addClass('sui-disp-none');
-	})
-	$(document).on('click.sui-btn', function (e) {
-		var height = e.target.dataset.height;
-		if (!height) return;
-		$(document.body).css('height', height + 'px');
-	})
-	</script>
+
 	<style type="text/css">
 		.sui-btn {
 			position: relative;
@@ -44,7 +28,7 @@
 	<button class="sui-btn" data-target='box4'>box4</button>
 
 	<!--case 1-->
-	<div class="sui-popbox sui-disp-none" data-cancel=true id="box1">
+	<div class="sui-popbox sui-disp-none" data-position='fixed' data-transition=true data-cancel=true id="box1">
 		<div class="sui-popbox-mask"></div>
 		<div class="sui-popbox-box">
 			<div class="sui-popbox-content">
@@ -57,7 +41,7 @@
 		</div>
 	</div>
 	<!--case 2-->
-	<div class="sui-popbox sui-disp-none" id="box2">
+	<div class="sui-popbox sui-disp-none" data-position='fixed' id="box2">
 		<div class="sui-popbox-mask"></div>
 		<div class="sui-popbox-box sui-mg-custom">
 			<div class="sui-popbox-title">title</div>
@@ -101,5 +85,22 @@
 			</div>
 		</div>
 	</div>
+	<script type="text/javascript">
+		$('body').on('click.sui-btn', function (e) {
+			var tar = $(e.target).data('target');
+			if (!tar) return;
+				$tar = $("#" + tar);
+			if ($tar.hasClass('sui-disp-none')) {
+				$tar.showPopbox();
+			}
+			else $tar.suiHide('sui-disp-none');
+		})
+		$('body').on('click.sui-btn', function (e) {
+			var height = $(e.target).data('height');
+			if (!height) return;
+			$(document.body).css('height', height + 'px');
+		})
+
+	</script>
 </body>
 </html>
