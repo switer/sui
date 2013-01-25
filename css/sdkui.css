@@ -7,7 +7,7 @@
 .sui-mg-top {margin-top: 10px!important;}
 .sui-mg-right {margin-right: 10px!important;}
 .sui-mg6 {margin: 6px;}
-.sui-disp-none {display: none;}
+.sui-disp-none {display: none!important;}
 /*Button style Begin*/
 .sui-btn {
   /*layout:padding,margin,display*/
@@ -17,7 +17,7 @@
   /*style:font(size,family,color),text(align,shadow),background*/
   font-size: 16px;color: #FFFFFF;text-align: center;background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #fd7f3a), color-stop(100%, #fc5402));
 }
-.sui-btn.disabled {color:#AAA;}
+.sui-btn.sui-disabled {color:#AAA;}
 .sui-btn-group {display: -webkit-box;}
 .sui-btn-group .sui-btn:first-child {margin-left:0;margin-right: 10px;}
 .sui-btn-group .sui-btn:last-child {margin-right:0;margin-left: 10px;}
@@ -39,7 +39,7 @@
 .sui-btn-nav .sui-btn:first-child {border-right: 0;border-radius: 5px 0 0 5px;}
 .sui-btn-nav .sui-btn:last-child {border-left: 0;;border-radius: 0 5px 5px 0;}
 /*disabled*/
-.sui-btn-nav .sui-btn.disabled {color:#AAA;}
+.sui-btn-nav .sui-btn.sui-disabled {color:#AAA;}
 
 /*Select btn*/
 .sui-btn-sel {
@@ -137,6 +137,8 @@
 }
 .sui-popbox-content {padding: 10px;}
 /*PopBox style End*/
+
+.sui-popbox-black {background: black;color: white;}
 
 /*Custom Size*/
 .sui-size-custom {height: 93px;width: 108px;}

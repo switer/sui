@@ -3,7 +3,7 @@
   var conf = {
     "feed_time" : 250,
     "feed_class" : 'sui-no-feed',
-    "disabled" : 'disabled',
+    "disabled" : 'sui-disabled',
     "nav_btn" : 'sui-btn-nav',
     "nav_on" : 'sui-on',
     "button" : '.sui-btn'

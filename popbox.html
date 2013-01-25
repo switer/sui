@@ -8,6 +8,7 @@
 	<meta name="format-detection" content="telephone=no">
 	<link rel="stylesheet" type="text/css" href="css/sdkui.css">
 	<script type="text/javascript" src="js/zepto.js"></script>
+	<script type="text/javascript" src="js/ui.base.js"></script>
 	<script type="text/javascript" src="js/ui.popbox.js"></script>
 	<script type="text/javascript" src="js/ui.input.js"></script>
 	<script type="text/javascript" src="js/ui.button.js"></script>
@@ -55,7 +56,7 @@
 		</div>
 	</div>
 	<!--case 3-->
-	<div class="sui-popbox sui-disp-none" id="box3">
+	<div class="sui-popbox sui-disp-none" data-noscroll='true' id="box3">
 		<div class="sui-popbox-mask"></div>
 		<div class="sui-popbox-box sui-w-custom" style="margin-top:420px">
 			<div class="sui-popbox-content">
@@ -64,7 +65,7 @@
 					<input class="sui-inp" type="text"  placeholder="6-20位数字" />
 				</div>
 				<div class="sui-btn-group sui-mg-top">
-					<input class="sui-btn sui-btn-primary" type="button" value="登录">
+					<input class="sui-btn sui-btn-primary" id="hidebox3" type="button" value="登录">
 					<input class="sui-btn" type="button" value="注册">
 				</div>
 			</div>
@@ -73,7 +74,7 @@
 	<!--case 4-->
 	<div class="sui-popbox sui-disp-none" id="box4">
 		<div class="sui-popbox-mask"></div>
-		<div class="sui-popbox-box sui-w-custom" style="top:120px">
+		<div class="sui-popbox-box sui-w-custom sui-popbox-black" style="top:120px">
 			<div class="sui-popbox-content">
 				<br/>
 				<div>
@@ -81,7 +82,7 @@
 					<center class="sui-mg-top">手机号:12312312312</center>
 					<center class="sui-mg-top">已成功绑定</center>
 				</div>
-				<input class="sui-btn sui-w-full sui-mg-top" type="button" value="注册">
+				<input class="sui-btn sui-w-full sui-mg-top sui-btn-primary" type="button" value="注册">
 			</div>
 		</div>
 	</div>
@@ -100,6 +101,9 @@
 			if (!height) return;
 			$(document.body).css('height', height + 'px');
 		})
+		$('#hidebox3').on('click', function () {
+			$('#box3').delayHide();
+		});
 
 	</script>
 </body>
