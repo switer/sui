@@ -1,4 +1,4 @@
 SDK.UI
 ======
 
-UI components
+UI components [GitPage](http://switer.github.com/SDK.UI/)
