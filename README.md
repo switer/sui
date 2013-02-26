@@ -86,12 +86,15 @@ UI components [GitPage](http://switer.github.com/SDK.UI/)
 ```css
 .sui-btn-pure
 ```
+![pure](https://raw.github.com/switer/resource/master/btn-pure.png)
 ```css
 .sui-btn-silver
 ```
+![silver](https://raw.github.com/switer/resource/master/btn-silver.png)
 ```css
 .sui-btn-inverse
 ```
+![inverse](https://raw.github.com/switer/resource/master/btn-inverse.png)
 
 **input主题**
 ```css
