@@ -78,10 +78,18 @@ UI components [GitPage](http://switer.github.com/SDK.UI/)
 ```
 ### 主题类
 **button主题**
+
 ```css
-.sui-btn-primary
+.sui-btn-primary 
+```
+![primary](https://raw.github.com/switer/resource/master/btn-orange.png)
+```css
 .sui-btn-pure
+```
+```css
 .sui-btn-silver
+```
+```css
 .sui-btn-inverse
 ```
 
