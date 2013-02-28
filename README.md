@@ -108,11 +108,11 @@ $('.sui-popbox').fixed(); //设置弹框的高度固定
 ```css
 .sui-btn-primary 
 ```
-![primary](https://raw.github.com/switer/resource/master/btn-orange.png)
+![orange](https://raw.github.com/switer/resource/master/btn-orange.png)
 ```css
 .sui-btn-pure
 ```
-![pure](https://raw.github.com/switer/resource/master/btn-pure.png)
+![primary](https://raw.github.com/switer/resource/master/btn-pure.png)
 ```css
 .sui-btn-silver
 ```
@@ -121,6 +121,10 @@ $('.sui-popbox').fixed(); //设置弹框的高度固定
 .sui-btn-inverse
 ```
 ![inverse](https://raw.github.com/switer/resource/master/btn-inverse.png)
+```css
+.sui-btn-pure
+```
+这是按钮
 
 **input主题**
 ```css
