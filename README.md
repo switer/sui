@@ -7,11 +7,14 @@ UI components For SDK H5 [SUI Demo Pages](http://switer.github.com/SDK.UI/)
 
 ### Button
 
-<code>data-toggle="2000"</code> 属性指定该按钮有toggle效果，且toggle时间为2000ms
+<code>data-toggle="2000"</code> toggle属性，指定该按钮的toggle时间为2000ms
 ```html
 <button class="sui-btn" data-toggle="2000"></button>
 ```
-
+<code>data-feedback="sui-feedback"</code> 自定义反馈属性，指定该按钮反馈类为feedback来进行自定义反馈
+```html
+<button class="sui-btn" data-feedback="sui-feedback"></button>
+```
 ### Input
 
 暂无，持续更新中
