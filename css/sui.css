@@ -4,6 +4,7 @@
 .sui-no-feed {-webkit-tap-highlight-color: rgba(0, 0, 0, 0);}
 .sui-disp-box {display:-webkit-box;}
 .sui-box-chi {-webkit-box-flex:1;}
+.sui-feedback {background: cornflowerBlue!important;color:white!important;text-shadow:none!important;}
 .sui-mg-top {margin-top: 10px!important;}
 .sui-mg-right {margin-right: 10px!important;}
 .sui-mg6 {margin: 6px;}

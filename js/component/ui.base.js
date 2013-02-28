@@ -4,12 +4,12 @@
     'hide_class' : 'sui-disp-none',
     "delay_time" : 100
   }
-  //public method
-  $.fn.delayHide = function () {
+  $.fn.delayHide = function (time) {
+    time = (typeof time) == 'number' ? time : conf.delay_time;
     var $sui = $(this);
     setTimeout(function () {
       $sui.suiHide();
-    } , conf.delay_time);
+    } , time);
   }
   $.fn.isHide = function () {
     return $(this).hasClass(conf.hide_class);

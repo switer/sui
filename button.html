@@ -8,12 +8,9 @@
 	<meta name="format-detection" content="telephone=no">
 	<link rel="stylesheet" type="text/css" href="css/sui.css">
 	<script type="text/javascript" src="js/zepto.js"></script>
-	<script type="text/javascript" src="js/sui.min.js"></script>
-	<!-- 
-	<script type="text/javascript" src="js/ui.base.js"></script>
-	<script type="text/javascript" src="js/ui.button.js"></script>
-	 -->
-	
+	<!--<script type="text/javascript" src="js/sui.min.js"></script>-->
+	<script type="text/javascript" src="js/component/ui.base.js"></script>
+	<script type="text/javascript" src="js/component/ui.button.js"></script>
 </head>
 <!--header-->
 <body>
@@ -26,9 +23,9 @@
 			</select>
 		</div>
 	</div>
-	<input class="sui-btn sui-btn-primary sui-mg-top" data-toggle="2000" type="button" value="toggle">
+	<input id="test" class="sui-btn sui-btn-primary sui-mg-top" data-toggle="2000" type="button" value="toggle">
 	<input class="sui-btn sui-btn-pure sui-mg-top" data-toggle="2000" type="button" value="toggle">
-	<input class="sui-btn sui-btn-silver sui-mg-top" type="button" value="修改密码">
+	<input class="sui-btn sui-btn-silver sui-mg-top" data-feedback="sui-feedback" type="button" value="修改密码">
 	<input class="sui-btn sui-w-full sui-mg-top" type="button" value="登录">
 	<input class="sui-btn sui-size-custom sui-mg-top" type="button" value="登录">
 	<input class="sui-btn sui-btn-inverse sui-w-full sui-mg-top" type="button" value="注册">
@@ -42,5 +39,10 @@
 		<input class="sui-btn sui-btn-silver" type="button" value="导航2">
 		<input class="sui-btn sui-btn-silver" type="button" value="导航3">
 	</div>
+	<script type="text/javascript">
+		$('#test').on('click', function () {
+			console.log('hello');
+		})
+	</script>
 </body>
 </html>
