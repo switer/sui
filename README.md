@@ -135,4 +135,49 @@ UI components [GitPage](http://switer.github.com/SDK.UI/)
 
 ## 组件增强API
    
+### 基础API
+
+```javascript
+$('.btn').suiShow()  //显示UI组件
+```
+```javascript
+$('.btn').suiHide()  //隐藏UI组件
+```
+```javascript
+$('.btn').delayHide([time])  //time时间后隐藏UI组件，默认空参数认为time == 100
+```
+```javascript
+$('.btn').isHide()  //UI组件是否已经隐藏，return bool
+```
+### 按钮buttonAPI
+
+`等同于<div class="sui-btn" data-toggle="200">的data-toggle属性`
+```javascript
+$('.btn').toggle(time, [callback])  //按钮toggle,time为toggle时间，callba为toggle完成的回调
+```
+```javascript
+$('.btn').enabled() //取消按钮不可点击效果
+```
+```javascript
+$('.btn').disabled() //按钮不可点击效果
+```
+```javascript
+$('.btn').isdisabled() //按钮是否处于disable状态, return bool
+```
+```javascript
+$('.btn').feed() //应用默认反馈效果
+```
+```javascript
+$('.btn').unfeed() //取消按钮的默认反馈效果
+```
+```javascript
+$('.btn').feeback([className]) //自定义反馈，@className：反馈样式class，空参数默认为：sui-feedback
+```
+
+### 弹出框 API
+
+
+
+
+
 
