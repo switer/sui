@@ -1,7 +1,7 @@
 SDK.UI
 ======
 
-UI components [GitPage](http://switer.github.com/SDK.UI/)
+UI components For SDK H5 [SUI Demo Pages](http://switer.github.com/SDK.UI/)
 
 ## 组件DOM属性
 
