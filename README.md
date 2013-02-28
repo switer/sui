@@ -106,11 +106,11 @@ $('.sui-popbox').fixed(); //设置弹框的高度固定
 **button主题**
 
 ```css
-.sui-btn-primary 
+.sui-btn-orange 
 ```
 ![orange](https://raw.github.com/switer/resource/master/btn-orange.png)
 ```css
-.sui-btn-pure
+.sui-btn-primary
 ```
 ![primary](https://raw.github.com/switer/resource/master/btn-pure.png)
 ```css
