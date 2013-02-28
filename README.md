@@ -84,6 +84,10 @@ $('.sui-popbox').showPopbox(); //显示一个隐藏的弹框
 ```javascript
 $('.sui-popbox').fixed(); //设置弹框的高度固定
 ```
+### 输入框 API
+
+暂无，持续更新中...
+
 ## 组件基础类
 
 ### 组件类
