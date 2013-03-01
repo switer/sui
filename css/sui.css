@@ -90,14 +90,26 @@
 .sui-inp-box .sui-inp {
   display: block;-webkit-box-flex:1;padding: 10px 0px 10px 1em;margin-top: 3px;
   height: 20px;outline: none;line-height: 100%;border: none;
-  background-color: transparent;
+  background-color: transparent;font-size: 16px;
+}
+.sui-inp-inner-label {
+  display: block;margin-left: 10px;
+  height: 100%;line-height: 45px;
+  text-align: right;font-size: 16px;
+}
+.sui-inp-text {
+  display: block;-webkit-box-flex:1;padding-left: 1em;
+  height: 100%;line-height: 45px;
+  font-size: 16px;background-color: transparent;overflow: hidden;text-overflow: ellipsis;;
+/*  display: block;-webkit-box-flex:1;padding: 10px 0px 10px 1em;margin-top: 3px;
+  height: 20px;outline: none;line-height: 100%;border: none;
+  background-color: transparent;font-size: 16px;*/
 }
 .sui-inp-cmp {display: -webkit-box;}
 .sui-inp-cmp .sui-inp-box {-webkit-box-flex:1;}
 .sui-inp-label {
   padding-left: 4px;
   line-height: 20px;width: 45px;
-  font-size: 14px;
   margin-top: 10px;
   text-align: left;vertical-align: middle;
 }
