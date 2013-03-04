@@ -2,6 +2,7 @@
 
   var conf = {
     'hide_class' : 'sui-disp-none',
+    'popbox_class' : 'sui-popbox'
     "delay_time" : 100
   }
   $.fn.delayHide = function (time) {
@@ -16,7 +17,9 @@
   }
   $.fn.suiHide = function () {
     var $sui = $(this);
-    $sui.addClass(conf.hide_class);
+    //使用弹框组件自己的显示方法
+    if ($sui.hasClass(conf.popbox_class)) $sui.showPopbox();
+    else $sui.addClass(conf.hide_class);
   }
   $.fn.suiShow = function () {
     $(this).removeClass(conf.hide_class);
@@ -28,5 +31,10 @@
   $.fn.suiOff = function () {
     $(this).removeClass(conf.on_class);
     return this;
+  }
+  $.fn.suiToggle = function () {
+    var $sui = $(this);
+    if ($sui.hasClass(conf.hide_class)) $sui.suiShow();
+    else $sui.suiHide();
   }
 }(window.$);

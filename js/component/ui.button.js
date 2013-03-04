@@ -9,7 +9,7 @@
     "button" : '.sui-btn',
     "feedback_class" : 'sui-feedback'
   }
-  $.fn.suiToggle = function  (time, callback) {
+  $.fn.btnToggle = function  (time, callback) {
     var $this = this;
     $this.on('click', function () {
       _toggle.call($this, time, callback)
