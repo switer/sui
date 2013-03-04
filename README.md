@@ -35,7 +35,8 @@ UI components For SDK H5 [SUI Demo Pages](http://switer.github.com/SDK.UI/)
 
 
 ## 组件增强API
-   
+命名尽量避免与JQ产生冲突  
+
 ### 基础API
 
 ```javascript
@@ -55,7 +56,7 @@ $('.btn').isHide()  //UI组件是否已经隐藏，return bool
 
 `等同于<div class="sui-btn" data-toggle="200">的data-toggle属性`
 ```javascript
-$('.btn').toggle(time, [callback])  //按钮toggle,time为toggle时间，callba为toggle完成的回调
+$('.btn').suiToggle(time, [callback])  //按钮toggle,time为toggle时间，callba为toggle完成的回调
 ```
 ```javascript
 $('.btn').enabled() //取消按钮不可点击效果
