@@ -40,23 +40,26 @@ UI components For SDK H5 [SUI Demo Pages](http://switer.github.com/SDK.UI/)
 ### 基础API
 
 ```javascript
-$('.btn').suiShow()  //显示UI组件
+$('.sui-cpn').suiShow()  //显示UI组件
 ```
 ```javascript
-$('.btn').suiHide()  //隐藏UI组件
+$('.sui-cpn').suiHide()  //隐藏UI组件
 ```
 ```javascript
-$('.btn').delayHide([time])  //time时间后隐藏UI组件，默认空参数认为time == 100
+$('.sui-cpn').delayHide([time])  //time时间后隐藏UI组件，默认空参数认为time == 100
 ```
 ```javascript
-$('.btn').isHide()  //UI组件是否已经隐藏，return bool
+$('.sui-cpn').isHide()  //UI组件是否已经隐藏，return bool
+```
+```javascript
+$('.sui-cpn').suiToggle() //通用UI组建的toggle
 ```
 
 ### 按钮buttonAPI
 
 `等同于<div class="sui-btn" data-toggle="200">的data-toggle属性`
 ```javascript
-$('.btn').suiToggle(time, [callback])  //按钮toggle,time为toggle时间，callba为toggle完成的回调
+$('.btn').btnToggle(time, [callback])  //按钮toggle,time为toggle时间，callba为toggle完成的回调
 ```
 ```javascript
 $('.btn').enabled() //取消按钮不可点击效果
