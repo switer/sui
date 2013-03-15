@@ -1,3 +1,4 @@
+
 !function ($) {
 
   var conf = {
@@ -9,7 +10,11 @@
     "button" : '.sui-btn',
     "feedback_class" : 'sui-feedback'
   }
-  $.fn.btnToggle = function  (time, callback) {
+  /**
+  *   按钮是否可被点击的闭合
+  *   @param
+  **/
+  $.fn.suiToggle = function  (time, callback) {
     var $this = this;
     $this.on('click', function () {
       _toggle.call($this, time, callback)

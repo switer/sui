@@ -1,10 +1,14 @@
+
 !function ($) {
 
   var conf = {
     'hide_class' : 'sui-disp-none',
-    'popbox_class' : 'sui-popbox'
+		'on_class' : 'sui-on',
     "delay_time" : 100
   }
+  /**
+  *   延时指定的时间隐藏组件
+  **/
   $.fn.delayHide = function (time) {
     time = (typeof time) == 'number' ? time : conf.delay_time;
     var $sui = $(this);
@@ -12,29 +16,36 @@
       $sui.suiHide();
     } , time);
   }
+  /**
+  *   判断组件是否处于隐藏状态
+  *   @return boolean
+  **/
   $.fn.isHide = function () {
     return $(this).hasClass(conf.hide_class);
   }
+  /**
+  *   隐藏sui组件
+  **/
   $.fn.suiHide = function () {
     var $sui = $(this);
-    //使用弹框组件自己的显示方法
-    if ($sui.hasClass(conf.popbox_class)) $sui.showPopbox();
-    else $sui.addClass(conf.hide_class);
+    $sui.addClass(conf.hide_class);
   }
+  /**
+  *   显示sui组件
+  **/
   $.fn.suiShow = function () {
     $(this).removeClass(conf.hide_class);
   }
+  /**
+  *   导航按钮的面包屑on
+  **/
   $.fn.suiOn = function () {
     $(this).addClass(conf.on_class);
-    return this;
   }
+  /**
+  *   导航按钮的面包屑off
+  **/
   $.fn.suiOff = function () {
     $(this).removeClass(conf.on_class);
-    return this;
-  }
-  $.fn.suiToggle = function () {
-    var $sui = $(this);
-    if ($sui.hasClass(conf.hide_class)) $sui.suiShow();
-    else $sui.suiHide();
   }
 }(window.$);
