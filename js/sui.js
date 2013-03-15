@@ -58,7 +58,7 @@
     var $mask = $(e.target),
         $parent = $mask.parent();
     if ( !$mask.hasClass(conf.mask_class) ) return;
-    if ($parent.data('cancel')) {
+    if ($parent.data('cancel') == true || $parent.data('cancel') === 'true') {
       //防止事件透传, 采用delay隐藏
       $parent.delayHide();
     }
@@ -114,7 +114,11 @@
     "button" : '.sui-btn',
     "feedback_class" : 'sui-feedback'
   }
-  $.fn.toggle = function  (time, callback) {
+  /**
+  *   按钮是否可被点击的闭合
+  *   @param
+  **/
+  $.fn.suiToggle = function  (time, callback) {
     var $this = this;
     $this.on('click', function () {
       _toggle.call($this, time, callback)
@@ -205,8 +209,12 @@
 
   var conf = {
     'hide_class' : 'sui-disp-none',
+		'on_class' : 'sui-on',
     "delay_time" : 100
   }
+  /**
+  *   延时指定的时间隐藏组件
+  **/
   $.fn.delayHide = function (time) {
     time = (typeof time) == 'number' ? time : conf.delay_time;
     var $sui = $(this);
@@ -214,14 +222,36 @@
       $sui.suiHide();
     } , time);
   }
+  /**
+  *   判断组件是否处于隐藏状态
+  *   @return boolean
+  **/
   $.fn.isHide = function () {
     return $(this).hasClass(conf.hide_class);
   }
+  /**
+  *   隐藏sui组件
+  **/
   $.fn.suiHide = function () {
     var $sui = $(this);
     $sui.addClass(conf.hide_class);
   }
+  /**
+  *   显示sui组件
+  **/
   $.fn.suiShow = function () {
     $(this).removeClass(conf.hide_class);
+  }
+  /**
+  *   导航按钮的面包屑on
+  **/
+  $.fn.suiOn = function () {
+    $(this).addClass(conf.on_class);
+  }
+  /**
+  *   导航按钮的面包屑off
+  **/
+  $.fn.suiOff = function () {
+    $(this).removeClass(conf.on_class);
   }
 }(window.$);
