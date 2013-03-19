@@ -33,6 +33,7 @@ UI components For SDK H5 [SUI Demo Pages](http://switer.github.com/SDK.UI/)
 
 `data-noscroll=true` 属性指定当点击非弹出框位置，弹框页面不可滚动
 
+`data-center=true` 属性指定弹出框位置居中，此属性建议不要与`data-position="fixed"`共用
 
 ## 组件增强API
 命名尽量避免与JQ产生冲突  
