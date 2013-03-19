@@ -1,4 +1,6 @@
+
 /*ui.popbox.js*/
+
 !function ($) {
 
   var conf = {
@@ -15,6 +17,10 @@
   }
   $.fn.trantision = function () {
     $(this).css('webkitTransition', 'top 1s');
+  }
+  $.fn.center =  function () {
+    var diffHeight = document.height - $(this).height();
+    $(this).css('marginTop', diffHeight / 2);
   }
   /**
   * 显示弹框，并设置高度
@@ -38,6 +44,9 @@
       $popbox.data('setPosition', 'fixed');
       $popbox.fixed();
     }
+    //输入框位于屏幕中间
+    if ( $popbox.data('center') == 'true') $(box).center();
+    //过渡动画
     $popbox.data('transition') && box && (box.style['webkitTransition'] = 'top 1s');
     
   }
@@ -79,7 +88,9 @@
     }
   }
 }(window.$);
+
 /*ui.input.js*/
+
 !function ($) {
 
   var conf = {};
@@ -101,7 +112,9 @@
     return (val === undefined || val === null || val.length === 0);
   }
 }(window.$);
+
 /*ui.button.js*/
+
 !function ($) {
 
   var conf = {
@@ -203,7 +216,9 @@
     }
   })
 }(window.$);
+
 /*ui.base.js*/
+
 !function ($) {
 
   var conf = {
