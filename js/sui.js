@@ -10,14 +10,23 @@
     "delay_time" : 100
   }
   var _timer, _this =this;
+  /**
+  * 定时检验矫正弹框的位置
+  **/
   $.fn.checkPosition = function () {
     setInterval(function () {
       $box.data('top') && $box.css('top', parseInt($box.data('top')) + document.body.scrollTop);
     }, conf.delay_time);
   }
+  /**
+  * 位置的变换采用过渡动画（例如：滚动导致的位置变换）
+  **/
   $.fn.trantision = function () {
     $(this).css('webkitTransition', 'top 1s');
   }
+  /**
+  * 弹框的位置居中
+  **/
   $.fn.center =  function () {
     var diffHeight = document.height - $(this).height();
     $(this).css('marginTop', diffHeight / 2);
@@ -44,12 +53,15 @@
       $popbox.data('setPosition', 'fixed');
       $popbox.fixed();
     }
-    //输入框位于屏幕中间
+    //输入框位于屏幕中间(notice:不要与fixed共用)
     if ( $popbox.data('center') == 'true') $(box).center();
     //过渡动画
     $popbox.data('transition') && box && (box.style['webkitTransition'] = 'top 1s');
     
   }
+  /**
+  *  采用JS校验位置的方式使弹框位置固定
+  **/
   $.fn.fixed = function (e) {
     var $popbox = $(this),
         $box = $popbox.find('.sui-popbox-box');
@@ -62,6 +74,7 @@
     window.addEventListener('scroll', scrollHandler);
     scrollHandler();
   }
+  //弹框的遮罩点击事件
   $(document).on('click.sui-popbox>.sui-popbox-mask', function (e) {
     var $mask = $(e.target),
         $parent = $mask.parent();
