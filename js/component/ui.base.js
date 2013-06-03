@@ -4,6 +4,7 @@
   var conf = {
     'hide_class' : 'sui-disp-none',
 		'on_class' : 'sui-on',
+    'popbox_class' : 'sui-popbox',
     "delay_time" : 100
   }
   /**
@@ -34,7 +35,12 @@
   *   显示sui组件
   **/
   $.fn.suiShow = function () {
-    $(this).removeClass(conf.hide_class);
+    var $this = $(this);
+    if ($this.hasClass(conf.popbox_class)) {
+      $this.showPopbox();
+    } else {
+      $this.removeClass(conf.hide_class);
+    }
   }
   /**
   *   导航按钮的面包屑on
