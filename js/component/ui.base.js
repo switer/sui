@@ -1,9 +1,10 @@
 
+
 !function ($) {
 
   var conf = {
     'hide_class' : 'sui-disp-none',
-		'on_class' : 'sui-on',
+    'on_class' : 'sui-on',
     'popbox_class' : 'sui-popbox',
     "delay_time" : 100
   }
@@ -36,6 +37,7 @@
   **/
   $.fn.suiShow = function () {
     var $this = $(this);
+
     if ($this.hasClass(conf.popbox_class)) {
       $this.showPopbox();
     } else {
@@ -53,5 +55,8 @@
   **/
   $.fn.suiOff = function () {
     $(this).removeClass(conf.on_class);
+  }
+  $.fn.isOn = function () {
+    return $(this).hasClass(conf.on_class);
   }
 }(window.$);

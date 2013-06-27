@@ -1,4 +1,5 @@
 
+
 !function ($) {
 
   var conf = {
@@ -67,8 +68,7 @@
   /**
   * Button Event
   **/
-  $(document).on('click.sui-btn', function (e) {
-
+  $(document).on('click .sui-btn,.sui-btn-check,.sui-btn-switch', function (e) {
     var $btn = $(e.target);
         $btn.feed();
 
@@ -100,3 +100,4 @@
     }
   })
 }(window.$);
+

@@ -23,6 +23,8 @@
 			</select>
 		</div>
 	</div>
+	<div class='sui-btn-check sui-mg-top sui-on' id='checkbox'></div>
+	<div class='sui-btn-switch sui-mg-top' id="switch"></div>
 	<input id="test" class="sui-btn sui-btn-primary sui-mg-top" data-toggle="2000" type="button" value="toggle">
 	<input class="sui-btn sui-btn-pure sui-mg-top" data-toggle="2000" type="button" value="toggle">
 	<input class="sui-btn sui-btn-silver sui-mg-top" data-feedback="sui-feedback" type="button" value="修改密码">
@@ -42,6 +44,20 @@
 	<script type="text/javascript">
 		$('#test').on('click', function () {
 			console.log('hello');
+		})
+		$('#checkbox').on('click', function (e) {
+			var $this = $(this);
+			if ($this.isOn()) 
+				$this.suiOff();
+			else $this.suiOn();
+			
+		})
+		$('#switch').on('click', function (e) {
+			var $this = $(this);
+			if ($this.isOn()) 
+				$this.suiOff();
+			else $this.suiOn();
+			
 		})
 	</script>
 </body>
