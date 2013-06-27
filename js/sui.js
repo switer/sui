@@ -10,6 +10,9 @@
     "delay_time" : 100
   }
   var _timer, _this =this;
+  function _suiShow () {
+    this.removeClass(conf.hide_class);
+  }
   /**
   * 定时检验矫正弹框的位置
   **/
@@ -25,11 +28,11 @@
     $(this).css('webkitTransition', 'top 1s');
   }
   /**
-  * 弹框的位置居中
-  **/
+  * 设定弹框位置居中
+  */
   $.fn.center =  function () {
-    var diffHeight = document.height - $(this).height();
-    $(this).css('marginTop', diffHeight / 2);
+    var diffHeight = document.height - parseInt($(this).height());
+    $(this).css('marginTop', (diffHeight / 2) + 'px');
   }
   /**
   * 显示弹框，并设置高度
@@ -42,11 +45,14 @@
     //定高
     var height =  document.body.scrollHeight;
     $popbox.height(height);
+    //显示
+    _suiShow.call($popbox);
     //定时校验机制, 一次延时校验
     function _fixedHeight() {
       height =  document.body.scrollHeight;
       if ( height !== $popbox.height() ) $popbox.height(height);
     }
+    //延时100ms，检验高度
     setTimeout(_fixedHeight, 100);
     /*根据data配置数据*/
     if ( $popbox.data('position') === 'fixed' && $popbox.data('setPosition') !== 'fixed' ) {
@@ -196,8 +202,7 @@
   /**
   * Button Event
   **/
-  $(document).on('click.sui-btn', function (e) {
-
+  $(document).on('click .sui-btn,.sui-btn-check,.sui-btn-switch', function (e) {
     var $btn = $(e.target);
         $btn.feed();
 
@@ -236,7 +241,8 @@
 
   var conf = {
     'hide_class' : 'sui-disp-none',
-		'on_class' : 'sui-on',
+    'on_class' : 'sui-on',
+    'popbox_class' : 'sui-popbox',
     "delay_time" : 100
   }
   /**
@@ -267,7 +273,13 @@
   *   显示sui组件
   **/
   $.fn.suiShow = function () {
-    $(this).removeClass(conf.hide_class);
+    var $this = $(this);
+
+    if ($this.hasClass(conf.popbox_class)) {
+      $this.showPopbox();
+    } else {
+      $this.removeClass(conf.hide_class);
+    }
   }
   /**
   *   导航按钮的面包屑on
@@ -280,5 +292,8 @@
   **/
   $.fn.suiOff = function () {
     $(this).removeClass(conf.on_class);
+  }
+  $.fn.isOn = function () {
+    return $(this).hasClass(conf.on_class);
   }
 }(window.$);
