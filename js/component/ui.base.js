@@ -30,7 +30,12 @@
   **/
   $.fn.suiHide = function () {
     var $sui = $(this);
-    $sui.addClass(conf.hide_class);
+
+    if ($sui.hasClass(conf.popbox_class)) {
+      $sui.hidePopbox();
+    } else {
+      $sui.addClass(conf.hide_class);
+    }
   }
   /**
   *   显示sui组件

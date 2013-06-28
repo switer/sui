@@ -13,6 +13,10 @@
   function _suiShow () {
     this.removeClass(conf.hide_class);
   }
+
+  function _suiHide () {
+    this.addClass(conf.hide_class);
+  } 
   /**
   * 定时检验矫正弹框的位置
   **/
@@ -31,8 +35,8 @@
   * 设定弹框位置居中
   */
   $.fn.center =  function () {
-    var diffHeight = document.height - parseInt($(this).height());
-    $(this).css('marginTop', (diffHeight / 2) + 'px');
+    var diffHeight = document.documentElement.clientHeight - parseInt($(this).height());
+    $(this).css('top', (diffHeight / 2) + 'px');
   }
   /**
   * 显示弹框，并设置高度
@@ -41,7 +45,7 @@
     var $popbox = $(this),
         box = $popbox.find(conf.box_sel)[0];
     _this.$popbox = $popbox;
-    $popbox.suiShow();
+
     //定高
     var height =  document.body.scrollHeight;
     $popbox.height(height);
@@ -54,16 +58,33 @@
     }
     //延时100ms，检验高度
     setTimeout(_fixedHeight, 100);
+    //输入框位于屏幕中间(notice:尽量不要与fixed共用，可能有bug)
+    if ( $popbox.data('center') == 'true') $(box).center();
+    console.log($(box).css('top'), $(box).offset()['top'])
     /*根据data配置数据*/
     if ( $popbox.data('position') === 'fixed' && $popbox.data('setPosition') !== 'fixed' ) {
       $popbox.data('setPosition', 'fixed');
       $popbox.fixed();
     }
-    //输入框位于屏幕中间(notice:不要与fixed共用)
-    if ( $popbox.data('center') == 'true') $(box).center();
+
     //过渡动画
     $popbox.data('transition') && box && (box.style['webkitTransition'] = 'top 1s');
     
+  }
+  /**
+  * 隐藏弹框 初始化显示弹框修改的值
+  **/
+  $.fn.hidePopbox = function () {
+    var $popbox = $(this),
+        $box = $popbox.find(conf.box_sel);
+
+    //还原初始垂直位置数据
+    $box.css('top', $box.data('top') + 'px');
+    //初始化dataset数据
+    $popbox.data('setPosition', '');
+    $box.data('top', '');
+
+    _suiHide.call($popbox)
   }
   /**
   *  采用JS校验位置的方式使弹框位置固定
@@ -71,14 +92,16 @@
   $.fn.fixed = function (e) {
     var $popbox = $(this),
         $box = $popbox.find('.sui-popbox-box');
-    function scrollHandler (event) {
-      if (!$box.data('top')) {
-        $box.data('top', $box.offset()['top'])
-      } 
-      $box.css('top', parseInt($box.data('top')) + document.body.scrollTop);
+    function _scrollHandler () {
+      if (!$popbox.isHide()) {
+        if (!$box.data('top')) {
+          $box.data('top', $box.offset()['top'])
+        }
+        $box.css('top', parseInt($box.data('top')) + document.body.scrollTop);
+      }
     }
-    window.addEventListener('scroll', scrollHandler);
-    scrollHandler();
+    window.addEventListener('scroll', _scrollHandler);
+    _scrollHandler();
   }
   //弹框的遮罩点击事件
   $(document).on('click.sui-popbox>.sui-popbox-mask', function (e) {
@@ -267,7 +290,12 @@
   **/
   $.fn.suiHide = function () {
     var $sui = $(this);
-    $sui.addClass(conf.hide_class);
+
+    if ($sui.hasClass(conf.popbox_class)) {
+      $sui.hidePopbox();
+    } else {
+      $sui.addClass(conf.hide_class);
+    }
   }
   /**
   *   显示sui组件
