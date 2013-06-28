@@ -103,10 +103,23 @@ $('.sui-popbox').fixed(); //设置弹框的高度固定
 ### 组件类
 ```css
 .sui-btn /*普通按钮*/
+```
+![orange](https://raw.github.com/switer/resource/master/btn-orange.png)
+```css
 .sui-btn-sel /*选择下拉按钮*/
 .sui-btn-group /*按钮组*/
 .sui-btn-nav /*导航栏按钮*/
 ```
+```css
+.sui-btn-check
+```
+![inverse](https://raw.github.com/switer/resource/master/images/cb1.png)  ![inverse](https://raw.github.com/switer/resource/master/images/cb2.png)
+```css
+.sui-btn-switch
+```
+![inverse](https://raw.github.com/switer/resource/master/images/on.png)   ![inverse](https://raw.github.com/switer/resource/master/images/off.png)
+
+
 ### 主题类
 **button主题**
 
@@ -130,14 +143,6 @@ $('.sui-popbox').fixed(); //设置弹框的高度固定
 .sui-btn-pure
 ```
 这是按钮
-```css
-.sui-btn-check
-```
-![inverse](https://raw.github.com/switer/resource/master/images/cb1.png)  ![inverse](https://raw.github.com/switer/resource/master/images/cb2.png)
-```css
-.sui-btn-switch
-```
-![inverse](https://raw.github.com/switer/resource/master/images/on.png)   ![inverse](https://raw.github.com/switer/resource/master/images/off.png)
 
 **input主题**
 ```css
