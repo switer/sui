@@ -130,6 +130,14 @@ $('.sui-popbox').fixed(); //设置弹框的高度固定
 .sui-btn-pure
 ```
 这是按钮
+```css
+.sui-btn-check
+```
+![inverse](https://raw.github.com/switer/resource/master/images/cb1.png)  ![inverse](https://raw.github.com/switer/resource/master/images/cb2.png)
+```css
+.sui-btn-switch
+```
+![inverse](https://raw.github.com/switer/resource/master/images/on.png)   ![inverse](https://raw.github.com/switer/resource/master/images/off.png)
 
 **input主题**
 ```css
