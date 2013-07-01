@@ -61,6 +61,9 @@
   $.fn.suiOff = function () {
     $(this).removeClass(conf.on_class);
   }
+  /**
+  *   检查按钮是否处于on状态
+  **/
   $.fn.isOn = function () {
     return $(this).hasClass(conf.on_class);
   }

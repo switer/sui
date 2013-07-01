@@ -21,10 +21,16 @@
       _toggle.call($this, time, callback)
     })
   }
+  /**
+  *   使按钮可以点击
+  **/
   $.fn.enabled = function () {
     $(this).removeAttr('disabled');
     $(this).removeClass(conf.disabled);
   }
+  /**
+  *   使按钮不可点击
+  **/
   $.fn.disabled = function () {
     $(this).attr('disabled', 'disabled');
     $(this).addClass(conf.disabled)
@@ -35,18 +41,30 @@
   $.fn.isdisabled = function () {
     return $(this).hasClass(conf.disabled);
   }
+  /**
+  *   使按钮拥有反馈效果
+  **/
   $.fn.feed = function () {
     $(this).removeClass(conf.feed_class);
   }
+  /**
+  *   使按钮没有反馈效果
+  **/
   $.fn.unfeed = function () {
     $(this).addClass(conf.feed_class)
   }
+  /**
+  *   添加按钮反馈事件
+  **/
   $.fn.feedback = function (className) {
     var $this = this;
     $this.on('click', function () {
       _feedback.call($(this), className);
     })
   }
+  /**
+  *   更改按钮文案
+  **/
   $.fn.btnText = function (text) {
     var $this = $(this);
 
