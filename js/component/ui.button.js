@@ -47,6 +47,15 @@
       _feedback.call($(this), className);
     })
   }
+  $.fn.btnText = function (text) {
+    var $this = $(this);
+
+    if ($this[0].tagName === 'INPUT' && $this.attr('type') === 'button') {
+      $this.val(text);
+    } else {
+      $this.html(text);
+    }
+  }
   function _toggle (time, callback) {
     var $this = this;
     $this.disabled();

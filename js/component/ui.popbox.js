@@ -59,7 +59,7 @@
     setTimeout(_fixedHeight, 100);
     //输入框位于屏幕中间(notice:尽量不要与fixed共用，可能有bug)
     if ( $popbox.data('center') == 'true') $(box).center();
-    console.log($(box).css('top'), $(box).offset()['top'])
+
     /*根据data配置数据*/
     if ( $popbox.data('position') === 'fixed' && $popbox.data('setPosition') !== 'fixed' ) {
       $popbox.data('setPosition', 'fixed');

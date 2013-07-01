@@ -60,7 +60,7 @@
     setTimeout(_fixedHeight, 100);
     //输入框位于屏幕中间(notice:尽量不要与fixed共用，可能有bug)
     if ( $popbox.data('center') == 'true') $(box).center();
-    console.log($(box).css('top'), $(box).offset()['top'])
+
     /*根据data配置数据*/
     if ( $popbox.data('position') === 'fixed' && $popbox.data('setPosition') !== 'fixed' ) {
       $popbox.data('setPosition', 'fixed');
@@ -178,10 +178,16 @@
       _toggle.call($this, time, callback)
     })
   }
+  /**
+  *   使按钮可以点击
+  **/
   $.fn.enabled = function () {
     $(this).removeAttr('disabled');
     $(this).removeClass(conf.disabled);
   }
+  /**
+  *   使按钮不可点击
+  **/
   $.fn.disabled = function () {
     $(this).attr('disabled', 'disabled');
     $(this).addClass(conf.disabled)
@@ -192,17 +198,38 @@
   $.fn.isdisabled = function () {
     return $(this).hasClass(conf.disabled);
   }
+  /**
+  *   使按钮拥有反馈效果
+  **/
   $.fn.feed = function () {
     $(this).removeClass(conf.feed_class);
   }
+  /**
+  *   使按钮没有反馈效果
+  **/
   $.fn.unfeed = function () {
     $(this).addClass(conf.feed_class)
   }
+  /**
+  *   添加按钮反馈事件
+  **/
   $.fn.feedback = function (className) {
     var $this = this;
     $this.on('click', function () {
       _feedback.call($(this), className);
     })
+  }
+  /**
+  *   更改按钮文案
+  **/
+  $.fn.btnText = function (text) {
+    var $this = $(this);
+
+    if ($this[0].tagName === 'INPUT' && $this.attr('type') === 'button') {
+      $this.val(text);
+    } else {
+      $this.html(text);
+    }
   }
   function _toggle (time, callback) {
     var $this = this;
@@ -321,6 +348,9 @@
   $.fn.suiOff = function () {
     $(this).removeClass(conf.on_class);
   }
+  /**
+  *   检查按钮是否处于on状态
+  **/
   $.fn.isOn = function () {
     return $(this).hasClass(conf.on_class);
   }
