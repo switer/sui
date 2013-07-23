@@ -92,6 +92,37 @@
       $this.removeClass(className);
     }, conf.feed_time);
   }
+  function _getFeedTarget () {
+    var $fbtn,
+        $tar = $(this);
+
+    if ( $tar.hasClass('sui-btn') ) {
+      $fbtn = $tar;
+    } else if ($tar.hasClass('sui-sel')) {
+      $fbtn = $tar.parent();
+    }
+    return $fbtn;
+  }
+  function _feedend () {
+
+  }
+  sui.touch.tap(
+    {
+      selector : '.sui-btn,.sui-sel', 
+      judge : function ($tar) {
+        if ($tar.hasClass('sui-btn') || $tar.hasClass('sui-sel')) {
+          return true;
+        } else {
+          return false;
+        }
+      }
+    },
+    function ($tar) {
+      _getFeedTarget.call($tar).addClass(conf.feedback_class);
+    },
+    function ($tar) {
+      _getFeedTarget.call($tar).removeClass(conf.feedback_class);
+    })
   /**
   * Button Event
   **/
@@ -101,6 +132,11 @@
 
     //按钮处于disabled状态
     if ($btn.isdisabled()) return;
+
+    var globalSettings = {};
+
+    //全局设置，写在body元素上
+    globalSettings.feedback = $(document.body).data('btnfeedback') === 'true' ? true : false;
 
     //检查按钮的toggle配置
     var toggle = $btn.attr('data-toggle'),
@@ -113,9 +149,15 @@
       //disabled开关
       _toggle.call($btn, parseInt(toggle));
     }
-    if (feedback) {
-      _feedback.call($btn, feedback);
-    }
+    // if (feedback || globalSettings.feedback) {
+    //   var $fbtn;
+    //   if ( $btn.hasClass('sui-btn') ) {
+    //     $fbtn = $btn;
+    //   } else if ($btn.hasClass('sui-sel')) {
+    //     $fbtn = $btn.parent();
+    //   }
+    //   $fbtn &&  _feedback.call($fbtn, feedback);
+    // }
     //取消默认反馈
     setTimeout(function () {
       $btn.removeClass(conf.feed_class);

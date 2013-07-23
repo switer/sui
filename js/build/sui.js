@@ -1,4 +1,195 @@
 
+/*ui.extension.js*/
+
+!function ($) {
+
+  window.sui = {
+    /*touch extension*/
+    touch : {
+      /**
+      *   if touchable
+      **/
+      touchable : document.ontouchstart === undefined ? false : true,
+      /**
+      *   fix the real event type
+      **/
+      type : function (type) {
+
+        var eventType; //return event type value
+
+        switch(type) {
+          case 'start':;
+          case 'touchstart' :;
+          case 'mousedown' : eventType = this.touchable ? 'touchstart' : 'mousedown';
+          break;
+          case 'move':;
+          case 'touchmove' :;
+          case 'mousemove' : eventType = this.touchable ? 'touchmove' : 'mousemove';
+          break;
+          case 'end':;
+          case 'touchend' :; 
+          case 'mouseup' :  eventType = this.touchable ? 'touchend' : 'mouseup';
+          break;
+          default : eventType = type;
+        }
+        return eventType;
+      },
+      /**
+      *
+      **/
+      getOffset : function (e,type) {
+        if (e.offsetParent === null) return e[type];
+        else return e[type] + sui.touch.getOffset(e.offsetParent,type);
+      },
+      /**
+      *
+      **/
+      getCross : function (e) {
+        var height      = e.offsetHeight,
+            width       = e.offsetWidth,
+            offsetLeft  = this.getOffset(e,'offsetLeft'),
+            offsetTop   = this.getOffset(e,'offsetTop');
+        return {
+          left : offsetLeft,
+          right : offsetLeft + width,
+          top : offsetTop,
+          bottom : offsetTop + height
+        }
+
+      },
+      isMoveOut : function (x,y,cross) {
+        if ( x <= cross['right'] && x >= cross['left'] && y <= cross['bottom'] && y >= cross['top']) return false;
+        else return true;
+      },
+      tap : function (options, startcallback, endcallback) {
+
+        var _this = this,
+            isStart = false;
+
+        $(document.body).on(_this.type('start') + ' ' + options.selector, function(e) {
+          
+          var $tar = $(e.target);
+          if (!options.judge($tar)) {
+            isStart = false;
+            return;
+          }
+        
+          var cross = _this.getCross(e.target);
+
+          isStart = true;
+          function _endHandler () {
+            isStart && endcallback && endcallback.call($tar, $tar);
+            isStart = false;
+          }
+
+          if (!$tar.data('isinit')) {
+
+            /*add move handler*/
+            $tar.on(_this.type('move'), function (e) {
+              if (!isStart) return;
+              var ismoveout = false;
+              //jude by is touchable
+              if (_this.touchable) {
+                ismoveout = _this.isMoveOut(e.touches[0].pageX, e.touches[0].pageY, cross);
+              } else {
+                ismoveout = _this.isMoveOut(e.clientX, e.clientY, cross);
+              }
+
+              //if is move out trigger end handler
+              if (ismoveout) {
+                _endHandler();
+              }
+            })
+
+            /*add end handler*/
+            $tar.on(_this.type('end'), _endHandler)
+
+            if (!_this.touchable) {
+              $tar.on('mouseout', _endHandler)
+            }
+          }
+          $tar.data('isinit', 'true');
+          //start callback exec
+          startcallback && startcallback.call($tar, $tar);
+
+        });
+      }
+    }
+  }
+}(window.$)
+
+
+/*ui.base.js*/
+
+
+!function ($) {
+
+  var conf = {
+    'hide_class' : 'sui-disp-none',
+    'on_class' : 'sui-on',
+    'popbox_class' : 'sui-popbox',
+    "delay_time" : 100
+  }
+  /**
+  *   延时指定的时间隐藏组件
+  **/
+  $.fn.delayHide = function (time) {
+    time = (typeof time) == 'number' ? time : conf.delay_time;
+    var $sui = $(this);
+    setTimeout(function () {
+      $sui.suiHide();
+    } , time);
+  }
+  /**
+  *   判断组件是否处于隐藏状态
+  *   @return boolean
+  **/
+  $.fn.isHide = function () {
+    return $(this).hasClass(conf.hide_class);
+  }
+  /**
+  *   隐藏sui组件
+  **/
+  $.fn.suiHide = function () {
+    var $sui = $(this);
+
+    if ($sui.hasClass(conf.popbox_class)) {
+      $sui.hidePopbox();
+    } else {
+      $sui.addClass(conf.hide_class);
+    }
+  }
+  /**
+  *   显示sui组件
+  **/
+  $.fn.suiShow = function () {
+    var $this = $(this);
+
+    if ($this.hasClass(conf.popbox_class)) {
+      $this.showPopbox();
+    } else {
+      $this.removeClass(conf.hide_class);
+    }
+  }
+  /**
+  *   导航按钮的面包屑on
+  **/
+  $.fn.suiOn = function () {
+    $(this).addClass(conf.on_class);
+  }
+  /**
+  *   导航按钮的面包屑off
+  **/
+  $.fn.suiOff = function () {
+    $(this).removeClass(conf.on_class);
+  }
+  /**
+  *   检查按钮是否处于on状态
+  **/
+  $.fn.isOn = function () {
+    return $(this).hasClass(conf.on_class);
+  }
+}(window.$);
 /*ui.popbox.js*/
 
 
@@ -166,7 +357,8 @@
   $(document).on('click .sui-inp', function (e) {
     var $tar = $(e.target);
     if ( !$tar.hasClass(conf.input_class) ) return;
-    if ( $tar.data('focus') === 'true') {
+    if ( $tar.data('focus') === 'true' || 
+          ($(document.body).data('inpfocus') === 'true' && $tar.data('focus') !== 'false' ) ) {
       //清空placeholder的value
       _fulshInput.call(this,e)
       //失去焦点
@@ -175,10 +367,10 @@
         $tar.parent().removeClass(conf.focus_class)
       }
       // data-_blur用于标识已监听blur事件的私有标识
-      if ( $tar.data('_blur') !== 'true' ) {
+      if ( $tar.data('blur') !== 'true' ) {
         //监听输入框的blur事件
         $tar.on('blur', _blur)
-        $tar.data('_blur', 'true')
+        $tar.data('blur', 'true')
       }
       //输入框的效果在父容器上
       $tar.parent().addClass(conf.focus_class)
@@ -284,6 +476,37 @@
       $this.removeClass(className);
     }, conf.feed_time);
   }
+  function _getFeedTarget () {
+    var $fbtn,
+        $tar = $(this);
+
+    if ( $tar.hasClass('sui-btn') ) {
+      $fbtn = $tar;
+    } else if ($tar.hasClass('sui-sel')) {
+      $fbtn = $tar.parent();
+    }
+    return $fbtn;
+  }
+  function _feedend () {
+
+  }
+  sui.touch.tap(
+    {
+      selector : '.sui-btn,.sui-sel', 
+      judge : function ($tar) {
+        if ($tar.hasClass('sui-btn') || $tar.hasClass('sui-sel')) {
+          return true;
+        } else {
+          return false;
+        }
+      }
+    },
+    function ($tar) {
+      _getFeedTarget.call($tar).addClass(conf.feedback_class);
+    },
+    function ($tar) {
+      _getFeedTarget.call($tar).removeClass(conf.feedback_class);
+    })
   /**
   * Button Event
   **/
@@ -293,6 +516,11 @@
 
     //按钮处于disabled状态
     if ($btn.isdisabled()) return;
+
+    var globalSettings = {};
+
+    //全局设置，写在body元素上
+    globalSettings.feedback = $(document.body).data('btnfeedback') === 'true' ? true : false;
 
     //检查按钮的toggle配置
     var toggle = $btn.attr('data-toggle'),
@@ -305,9 +533,15 @@
       //disabled开关
       _toggle.call($btn, parseInt(toggle));
     }
-    if (feedback) {
-      _feedback.call($btn, feedback);
-    }
+    // if (feedback || globalSettings.feedback) {
+    //   var $fbtn;
+    //   if ( $btn.hasClass('sui-btn') ) {
+    //     $fbtn = $btn;
+    //   } else if ($btn.hasClass('sui-sel')) {
+    //     $fbtn = $btn.parent();
+    //   }
+    //   $fbtn &&  _feedback.call($fbtn, feedback);
+    // }
     //取消默认反馈
     setTimeout(function () {
       $btn.removeClass(conf.feed_class);
@@ -319,195 +553,4 @@
     }
   })
 }(window.$);
-
-
-/*ui.base.js*/
-
-
-!function ($) {
-
-  var conf = {
-    'hide_class' : 'sui-disp-none',
-    'on_class' : 'sui-on',
-    'popbox_class' : 'sui-popbox',
-    "delay_time" : 100
-  }
-  /**
-  *   延时指定的时间隐藏组件
-  **/
-  $.fn.delayHide = function (time) {
-    time = (typeof time) == 'number' ? time : conf.delay_time;
-    var $sui = $(this);
-    setTimeout(function () {
-      $sui.suiHide();
-    } , time);
-  }
-  /**
-  *   判断组件是否处于隐藏状态
-  *   @return boolean
-  **/
-  $.fn.isHide = function () {
-    return $(this).hasClass(conf.hide_class);
-  }
-  /**
-  *   隐藏sui组件
-  **/
-  $.fn.suiHide = function () {
-    var $sui = $(this);
-
-    if ($sui.hasClass(conf.popbox_class)) {
-      $sui.hidePopbox();
-    } else {
-      $sui.addClass(conf.hide_class);
-    }
-  }
-  /**
-  *   显示sui组件
-  **/
-  $.fn.suiShow = function () {
-    var $this = $(this);
-
-    if ($this.hasClass(conf.popbox_class)) {
-      $this.showPopbox();
-    } else {
-      $this.removeClass(conf.hide_class);
-    }
-  }
-  /**
-  *   导航按钮的面包屑on
-  **/
-  $.fn.suiOn = function () {
-    $(this).addClass(conf.on_class);
-  }
-  /**
-  *   导航按钮的面包屑off
-  **/
-  $.fn.suiOff = function () {
-    $(this).removeClass(conf.on_class);
-  }
-  /**
-  *   检查按钮是否处于on状态
-  **/
-  $.fn.isOn = function () {
-    return $(this).hasClass(conf.on_class);
-  }
-}(window.$);
-/*ui.extension.js*/
-
-!function ($) {
-
-  window.sui = {
-    /*touch extension*/
-    touch : {
-      /**
-      *   if touchable
-      **/
-      touchable : document.ontouchstart === undefined ? false : true,
-      /**
-      *   fix the real event type
-      **/
-      type : function (type) {
-
-        var eventType; //return event type value
-
-        switch(type) {
-          case 'start':;
-          case 'touchstart' :;
-          case 'mousedown' : eventType = this.touchable ? 'touchstart' : 'mousedown';
-          break;
-          case 'move':;
-          case 'touchmove' :;
-          case 'mousemove' : eventType = this.touchable ? 'touchmove' : 'mousemove';
-          break;
-          case 'end':;
-          case 'touchend' :; 
-          case 'mouseup' :  eventType = this.touchable ? 'touchend' : 'mouseup';
-          break;
-          default : eventType = type;
-        }
-        return eventType;
-      },
-      /**
-      *
-      **/
-      getOffset : function (e,type) {
-        if (e.offsetParent === null) return e[type];
-        else return e[type] + sui.touch.getOffset(e.offsetParent,type);
-      },
-      /**
-      *
-      **/
-      getCross : function (e) {
-        var height      = e.offsetHeight,
-            width       = e.offsetWidth,
-            offsetLeft  = this.getOffset(e,'offsetLeft'),
-            offsetTop   = this.getOffset(e,'offsetTop');
-        return {
-          left : offsetLeft,
-          right : offsetLeft + width,
-          top : offsetTop,
-          bottom : offsetTop + height
-        }
-
-      },
-      isMoveOut : function (x,y,cross) {
-        if ( x <= cross['right'] && x >= cross['left'] && y <= cross['bottom'] && y >= cross['top']) return false;
-        else return true;
-      },
-      tap : function (options, startcallback, endcallback) {
-
-        var _this = this,
-            isStart = false;
-
-        $(document.body).on(_this.type('start') + ' ' + options.selector, function(e) {
-          
-          var $tar = $(e.target);
-          if (!options.judge($tar)) {
-            isStart = false;
-            return;
-          }
-        
-          var cross = _this.getCross(e.target);
-
-          isStart = true;
-          function _endHandler () {
-            isStart && endcallback && endcallback.call($tar, $tar);
-            isStart = false;
-          }
-
-          if (!$tar.data('isinit')) {
-
-            /*add move handler*/
-            $tar.on(_this.type('move'), function (e) {
-              if (!isStart) return;
-              var ismoveout = false;
-              //jude by is touchable
-              if (_this.touchable) {
-                ismoveout = _this.isMoveOut(e.touches[0].pageX, e.touches[0].pageY, cross);
-              } else {
-                ismoveout = _this.isMoveOut(e.clientX, e.clientY, cross);
-              }
-
-              //if is move out trigger end handler
-              if (ismoveout) {
-                _endHandler();
-              }
-            })
-
-            /*add end handler*/
-            $tar.on(_this.type('end'), _endHandler)
-
-            if (!_this.touchable) {
-              $tar.on('mouseout', _endHandler)
-            }
-          }
-          $tar.data('isinit', 'true');
-          //start callback exec
-          startcallback && startcallback.call($tar, $tar);
-
-        });
-      }
-    }
-  }
-}(window.$)
 

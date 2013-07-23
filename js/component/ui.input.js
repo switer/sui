@@ -30,7 +30,8 @@
   $(document).on('click .sui-inp', function (e) {
     var $tar = $(e.target);
     if ( !$tar.hasClass(conf.input_class) ) return;
-    if ( $tar.data('focus') === 'true') {
+    if ( $tar.data('focus') === 'true' || 
+          ($(document.body).data('inpfocus') === 'true' && $tar.data('focus') !== 'false' ) ) {
       //清空placeholder的value
       _fulshInput.call(this,e)
       //失去焦点
@@ -39,10 +40,10 @@
         $tar.parent().removeClass(conf.focus_class)
       }
       // data-_blur用于标识已监听blur事件的私有标识
-      if ( $tar.data('_blur') !== 'true' ) {
+      if ( $tar.data('blur') !== 'true' ) {
         //监听输入框的blur事件
         $tar.on('blur', _blur)
-        $tar.data('_blur', 'true')
+        $tar.data('blur', 'true')
       }
       //输入框的效果在父容器上
       $tar.parent().addClass(conf.focus_class)

@@ -1,7 +1,7 @@
 var fs = require('fs')
 	, UglifyJS = require("uglify-js")
 	, comment
-	, files = ['ui.extension.js','ui.base.js','ui.button.js','ui.input.js','ui.popbox.js']
+	, files = ['ui.button.js','ui.input.js','ui.popbox.js','ui.base.js','ui.extension.js']
 	, content = ""
 	, file
 	, cmbFilename = 'sui.js'
