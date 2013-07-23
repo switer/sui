@@ -1,12 +1,13 @@
 var fs = require('fs')
 	, UglifyJS = require("uglify-js")
 	, comment
-	, files = ['ui.base.js','ui.button.js','ui.input.js','ui.popbox.js']
+	, files = ['ui.extension.js','ui.base.js','ui.button.js','ui.input.js','ui.popbox.js']
 	, content = ""
 	, file
 	, cmbFilename = 'sui.js'
 	, miniFilename = 'sui.min.js'
 	, path = './js/'
+	, builddir = './js/build/'
 	, componentPath = './js/component/';
 
 for (var i = files.length - 1; i >= 0; i--) {
@@ -15,11 +16,11 @@ for (var i = files.length - 1; i >= 0; i--) {
 	file = fs.readFileSync(componentPath + files[i],'UTF-8');
 	content += ( comment  + file );
 }
-fs.writeFileSync(path + cmbFilename, content, 'UTF-8');
+fs.writeFileSync(builddir + cmbFilename, content, 'UTF-8');
 console.log('\nCombind File : ' + path + cmbFilename);
 var result = UglifyJS.minify(path + cmbFilename);
 console.log('Minify File  : ' + path + miniFilename);
-fs.writeFileSync(path + miniFilename, result.code, 'UTF-8');
+fs.writeFileSync(builddir + miniFilename, result.code, 'UTF-8');
 
 // var indexHtml = fs.readFileSync('index.html','UTF-8')
 // 	, layoutHtml = fs.readFileSync('layout.html','UTF-8')

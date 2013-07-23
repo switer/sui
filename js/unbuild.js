@@ -1,5 +1,6 @@
 var fs = require('fs'),
 	fileName = './sui.js',
+	builddir = './build/',
 	compSliptReg = /\/\*ui\.[a-z]+\.js\*\//,
 	nameMathReg = /\/\*ui\.[a-z]+\.js\*\//g;
 
@@ -20,7 +21,7 @@ console.log(ctnArr.length);
 
 for (var i = 0; i< names.length; i++) {
 	var file = names[i].replace(/^\/\*/, '').replace(/\*\/$/, '');
-	fs.writeFileSync(file, ctnArr[i], 'UTF-8');
+	fs.writeFileSync(builddir + file, ctnArr[i], 'UTF-8');
 }
 
 	
