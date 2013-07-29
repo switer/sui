@@ -1,6 +1,10 @@
 
 /*ui.extension.js*/
-
+window.console = {
+      log : function  (msg) {
+        $('body').append('<div>' + msg + '</div>');
+      }
+    }
 !function ($) {
 
   window.sui = {
@@ -81,13 +85,18 @@
             isStart && endcallback && endcallback.call($tar, $tar);
             isStart = false;
           }
-
+          console.log('-----------------touchstart');
+          // e.preventDefault();
           if (!$tar.data('isinit')) {
 
             /*add move handler*/
             $tar.on(_this.type('move'), function (e) {
+              
+
               if (!isStart) return;
               var ismoveout = false;
+
+              console.log('-----------------touchmove');
               //jude by is touchable
               if (_this.touchable) {
                 ismoveout = _this.isMoveOut(e.touches[0].pageX, e.touches[0].pageY, cross);
