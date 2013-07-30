@@ -17,7 +17,11 @@ UI components For SDK H5 [SUI Demo Pages](http://switer.github.com/SDK.UI/)
 ```
 ### Input
 
-暂无，持续更新中
+```html
+<div class="sui-inp-box">
+	<input class="sui-inp" data-focus="true" /> 设置focus属性够，输入框聚焦后会高亮
+</div>
+```
 
 ### Popup Box
 ```html
