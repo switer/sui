@@ -91,6 +91,8 @@
             isStart && endcallback && endcallback.call($tar, $tar);
             isStart = false;
           }
+          //解决android的touchmove只触发一次的bug
+          e.preventDefault();
           //判断目标元素是否已初始化监听事件
           if (!$tar.data('isinit')) {
 

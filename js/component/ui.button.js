@@ -84,6 +84,7 @@
       }, time);
     }
   }
+  //延时点击反馈效果
   function _feedback (className) {
     var $this = this;
     className = className || conf.feedback_class;
@@ -92,6 +93,7 @@
       $this.removeClass(className);
     }, conf.feed_time);
   }
+  //获取目标反馈的影响元素
   function _getFeedTarget () {
     var $fbtn,
         $tar = $(this);
@@ -103,26 +105,36 @@
     }
     return $fbtn;
   }
-  function _feedend () {
 
-  }
-  sui.touch.tap(
-    {
-      selector : '.sui-btn,.sui-sel', 
-      judge : function ($tar) {
-        if ($tar.hasClass('sui-btn') || $tar.hasClass('sui-sel')) {
-          return true;
-        } else {
-          return false;
-        }
-      }
-    },
-    function ($tar) {
-      _getFeedTarget.call($tar).addClass(conf.feedback_class);
-    },
-    function ($tar) {
-      _getFeedTarget.call($tar).removeClass(conf.feedback_class);
-    })
+  /**
+  *   使用扩展接口，实现即时点击反馈
+  **/
+  !function (config) {
+
+    //是否配置了全局反馈属性且使用了sui扩展组件
+    if (config.isFeedback === 'true' && sui) {
+      sui.touch.tap(
+        {
+          selector : '.sui-btn,.sui-sel', 
+          judge : function ($tar) {
+            if ($tar.hasClass('sui-btn') || $tar.hasClass('sui-sel')) {
+              return true;
+            } else {
+              return false;
+            }
+          }
+        },
+        function ($tar) {
+          _getFeedTarget.call($tar).addClass(conf.feedback_class);
+        },
+        function ($tar) {
+          _getFeedTarget.call($tar).removeClass(conf.feedback_class);
+        });
+    }
+  }({
+    //传递是够反馈的配置
+    'isFeedback' : $(document.body).data('btnfeedback')
+  })
   /**
   * Button Event
   **/
@@ -133,14 +145,14 @@
     //按钮处于disabled状态
     if ($btn.isdisabled()) return;
 
-    var globalSettings = {};
+    // var globalSettings = {};
 
-    //全局设置，写在body元素上
-    globalSettings.feedback = $(document.body).data('btnfeedback') === 'true' ? true : false;
+    // 全局设置，写在body元素上
+    // globalSettings.feedback = $(document.body).data('btnfeedback') === 'true' ? true : false;
 
     //检查按钮的toggle配置
     var toggle = $btn.attr('data-toggle'),
-        feedback = $btn.attr('data-feedback'),
+        // feedback = $btn.attr('data-feedback'),
         $parent = $btn.parent(),
         isNavBtn = $parent ? $btn.parent().hasClass(conf.nav_btn) : false;
 
