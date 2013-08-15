@@ -8,18 +8,16 @@
 	<meta name="format-detection" content="telephone=no">
 	<link rel="stylesheet" type="text/css" href="css/sui.css">
 	<script type="text/javascript" src="js/zepto.js"></script>
-	<!-- 
-	<script type="text/javascript" src="js/component/ui.base.js"></script>
-	<script type="text/javascript" src="js/component/ui.input.js"></script>
-	 -->
+
 	<style type="text/css">
 	    .gr-w{width: 60px;}
 	    .gr-h {height:30px;}
 	</style>
 </head>
-<body>
+<body data-ctrl=true>
 	<div class="sui-inp-box sui-mg-top">
-		<input class="sui-inp" type="text"  placeholder="high-linght focus input" data-focus='true' />
+		<input class="sui-inp" type="text"  placeholder="high-linght focus input" data-focus='true' 
+		data-ctrl=true id='controlInp1'/>
 		<div class="sui-btn-sel sui-mg6">
 			<div class="sui-sel-box">
 				<select class="sui-sel">
@@ -33,7 +31,8 @@
 	<div class="sui-inp-cmp sui-mg-top">
 		<div class="sui-inp-label">登录</div>
 		<div class="sui-inp-box">
-			<input class="sui-inp" type="text"  placeholder="6-20位数字" />
+			<input class="sui-inp" type="password"  placeholder="6-20位数字" 
+			data-ctrl="true" id='controlInp2'/>
 		</div>
 	</div>
 	<div class="sui-inp-box sui-mg-top sui-inp-shadow-top">
@@ -56,7 +55,7 @@
 				<input class="sui-inp" type="text"  placeholder="6-20位数字" />
 			</div>
 		</div>
-		<input class="sui-btn sui-size-custom " type="button" value="登录">
+		<input class="sui-btn sui-size-custom " type="button" value="登录" id='inpBtn'>
 	</div>
 	<div class="sui-inp-group sui-mg-top">
 		<div class="sui-inp-box">
@@ -69,7 +68,18 @@
 			<input id="test" class="sui-btn sui-btn-primary gr-h" type="button" value="toggle">
 		</div>
 	</div>
-
+	<script type="text/javascript" src="js/component/ui.base.js"></script>
+	<script type="text/javascript" src="js/component/ui.input.js"></script>
+	<script type="text/javascript">
+		$('#controlInp1').setInp('123456');
+		$('#controlInp2').setInp('555555555');
+		$('#inpBtn').on('click', function () {
+			console.log($('#controlInp1').getInp());
+			console.log($('#controlInp2').getInp());
+		})
+	</script>
+	<!--
 	<script type="text/javascript" src="js/build/sui.min.js"></script>
+	-->
 </body>
 </html>
