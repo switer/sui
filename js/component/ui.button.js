@@ -147,6 +147,9 @@
   $(document).on( sui.touch.type('start') +' .sui-btn', function (e) {
     var $tar = $(e.target);
     if (!$tar.hasClass('sui-btn')) return;
+
+    var delay = 150;
+
     $tar.off(sui.touch.type('move'), scrollHandler);
     $tar.off(sui.touch.type('end'), endHandler);
 
@@ -154,7 +157,8 @@
       e.preventDefault();
     }
 
-    var isSroll = false;
+    var isSroll = false,
+        isEnd = false;
     function scrollHandler (e) {
       $tar.off(sui.touch.type('move'), scrollHandler);
       isSroll = true;
@@ -162,15 +166,21 @@
     }
     function endHandler (e) {
       $tar.off(sui.touch.type('end'), endHandler);
-      isSroll = true;
-      $tar.removeClass('on');
+      isEnd = true;
+      setTimeout(function () {
+        $tar.removeClass('on');
+      }, delay);
     }
     $tar.on(sui.touch.type('move'), scrollHandler);
     $tar.on(sui.touch.type('end'), endHandler);
 
     setTimeout(function () {
       !isSroll && $tar.addClass('on');
-    }, 100)
+      if (!isEnd) return;
+      setTimeout(function () {
+        $tar.removeClass('on');
+      }, delay);
+    }, delay);
   });
 
 
