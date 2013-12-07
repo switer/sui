@@ -20,11 +20,3 @@ var result = UglifyJS.minify(path + cmbFilename);
 console.log('Minify File  : ' + path + miniFilename);
 fs.writeFileSync(builddir + miniFilename, result.code, 'UTF-8');
 
-// var indexHtml = fs.readFileSync('index.html','UTF-8')
-// 	, layoutHtml = fs.readFileSync('layout.html','UTF-8')
-// 	, indexArray = indexHtml.split('<!--header-->')
-// 	, layoutHeader = layoutHtml.split('<!--header-->')[0];
-
-// indexArray[0] = layoutHeader;
-// console.log('Override html : ' + 'index.html');
-// fs.writeFileSync('index.html', indexArray.join('<!--header-->'), 'UTF-8');

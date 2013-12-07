@@ -136,14 +136,40 @@
     'isFeedback' : $(document.body).data('btnfeedback')
   })
 
-  $(document).on('touchstart .sui-btn', function (e) {
-    alert('touch start');
-    var $tar = $(e.target);
-    if (!$tar.hashClass('sui-btn')) return;
-  })
   /**
   * Button Event
   **/
+
+  /**
+     *   touch feedback
+     */
+      
+  $(document).on( sui.touch.type('start') +' .sui-btn', function (e) {
+    var $tar = $(e.target);
+    if (!$tar.hasClass('sui-btn')) return;
+    $tar.off(sui.touch.type('move'), scrollHandler);
+    $tar.off(sui.touch.type('end'), endHandler);
+
+    var isSroll = false;
+    function scrollHandler (e) {
+      $tar.off(sui.touch.type('move'), scrollHandler);
+      isSroll = true;
+      $tar.removeClass('on');
+    }
+    function endHandler (e) {
+      $tar.off(sui.touch.type('end'), endHandler);
+      isSroll = true;
+      $tar.removeClass('on');
+    }
+    $tar.on(sui.touch.type('move'), scrollHandler);
+    $tar.on(sui.touch.type('end'), endHandler);
+
+    setTimeout(function () {
+      !isSroll && $tar.addClass('on');
+    }, 200)
+  });
+
+
   $(document).on('click .sui-btn,.sui-btn-check,.sui-btn-switch', function (e) {
     var $btn = $(e.target);
         $btn.feed();
