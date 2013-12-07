@@ -148,7 +148,7 @@
     var $tar = $(event.target);
     if (!$tar.hasClass('sui-btn')) return;
 
-    $(document).off(sui.touch.type('move'), scrollHandler);
+    $('body').off(sui.touch.type('move'), scrollHandler);
     $tar.off('touchend', endHandler);
 
     if ($tar.data('noclick') == 'true') {
@@ -159,16 +159,16 @@
         isEnd = false,
         isFeed = false,
         isMoveInit = false,
-        delay = 150;
+        delay = 100;
 
     function scrollHandler (e) {
-      if (!isMoveInit) {
-        isMoveInit = true;
-        return;
-      }
+      // if (!isMoveInit) {
+      //   isMoveInit = true;
+      //   return;
+      // }
       // touchstart trigger with touchmove
       isSroll = true;
-      $(document).off('touchmove', scrollHandler);
+      $('body').off('touchmove', scrollHandler);
       $tar.removeClass('on');
     }
     function endHandler (e) {
@@ -179,9 +179,9 @@
 
       setTimeout(function () {
         isFeed && $tar.removeClass('on');
-      }, delay);
+      }, 150);
     }
-    $(document).on('touchmove', scrollHandler);
+    $('body').on('touchmove', scrollHandler);
     $tar.on('touchend', endHandler);
 
     setTimeout(function () {
@@ -191,7 +191,7 @@
 
       setTimeout(function () {
         $tar.removeClass('on');
-      }, delay);
+      }, 150);
 
     }, delay);
   });

@@ -123,6 +123,16 @@
 .sui-nav-silver {
   background: -webkit-gradient(linear,0 0,0 100%,from(#E1E1E1),to(#C3C7CF));
 }
+.sui-btn-blue {
+  -webkit-transition: background-color 0.3s linear;
+  background: none;
+  background-color: #4595df;
+}
+.sui-btn.sui-btn-blue.on{
+  -webkit-transition: none;
+  background: none;
+  background-color: rgb(100, 50, 205);
+}
 /*Button Themee End*/
 /*Button style End*/
 /*Input style begin*/
