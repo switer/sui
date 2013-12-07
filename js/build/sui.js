@@ -643,7 +643,7 @@
 
     setTimeout(function () {
       !isSroll && $tar.addClass('on');
-    }, 200)
+    }, 100)
   });
 
 
