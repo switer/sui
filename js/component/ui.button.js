@@ -143,43 +143,52 @@
   /**
      *   touch feedback
      */
-      
-  $(document).on( sui.touch.type('start') +' .sui-btn', function (e) {
-    var $tar = $(e.target);
+
+  $(document).on( sui.touch.type('start') +' .sui-btn', function (event) {
+    var $tar = $(event.target);
     if (!$tar.hasClass('sui-btn')) return;
 
-    var delay = 150;
 
-    $tar.off(sui.touch.type('move'), scrollHandler);
+    $(window).off('scroll', scrollHandler);
     $tar.off(sui.touch.type('end'), endHandler);
 
     if ($tar.data('noclick') == 'true') {
-      e.preventDefault();
+      event.preventDefault();
     }
 
     var isSroll = false,
-        isEnd = false;
+        isEnd = false,
+        isFeed = false,
+        delay = 150;
+
     function scrollHandler (e) {
-      $tar.off(sui.touch.type('move'), scrollHandler);
+      // touchstart trigger with touchmove
       isSroll = true;
+      $(window).off('scroll', scrollHandler);
       $tar.removeClass('on');
     }
     function endHandler (e) {
-      $tar.off(sui.touch.type('end'), endHandler);
       isEnd = true;
+      $tar.off(sui.touch.type('end'), endHandler);
+
+      if (isSroll) $tar.removeClass('on');
+
       setTimeout(function () {
-        $tar.removeClass('on');
+        isFeed && $tar.removeClass('on');
       }, delay);
     }
-    $tar.on(sui.touch.type('move'), scrollHandler);
+    $(window).on('scroll', scrollHandler);
     $tar.on(sui.touch.type('end'), endHandler);
 
     setTimeout(function () {
+      isFeed = true;
       !isSroll && $tar.addClass('on');
       if (!isEnd) return;
+
       setTimeout(function () {
         $tar.removeClass('on');
       }, delay);
+
     }, delay);
   });
 
