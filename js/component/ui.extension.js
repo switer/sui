@@ -7,7 +7,7 @@
       /**
       *   if touchable
       **/
-      touchable : document.ontouchstart === undefined ? false : true,
+      touchable : !!'ontouchstart' in window || !!navigator.msMaxTouchPoints,
       /**
       *   fix the real event type
       **/
