@@ -9,7 +9,7 @@
       /**
       *   if touchable
       **/
-      touchable : document.ontouchstart === undefined ? false : true,
+      touchable : !!'ontouchstart' in window || !!navigator.msMaxTouchPoints,
       /**
       *   fix the real event type
       **/
@@ -621,13 +621,12 @@
      *   touch feedback
      */
 
-  $(document).on( sui.touch.type('start') +' .sui-btn', function (event) {
+  $(document).on('touchstart .sui-btn', function (event) {
     var $tar = $(event.target);
     if (!$tar.hasClass('sui-btn')) return;
 
-
-    $(window).off('scroll', scrollHandler);
-    $tar.off(sui.touch.type('end'), endHandler);
+    $(document).off(sui.touch.type('move'), scrollHandler);
+    $tar.off('touchend', endHandler);
 
     if ($tar.data('noclick') == 'true') {
       event.preventDefault();
@@ -636,17 +635,22 @@
     var isSroll = false,
         isEnd = false,
         isFeed = false,
+        isMoveInit = false,
         delay = 150;
 
     function scrollHandler (e) {
+      if (!isMoveInit) {
+        isMoveInit = true;
+        return;
+      }
       // touchstart trigger with touchmove
       isSroll = true;
-      $(window).off('scroll', scrollHandler);
+      $(document).off('touchmove', scrollHandler);
       $tar.removeClass('on');
     }
     function endHandler (e) {
       isEnd = true;
-      $tar.off(sui.touch.type('end'), endHandler);
+      $tar.off('touchend', endHandler);
 
       if (isSroll) $tar.removeClass('on');
 
@@ -654,8 +658,8 @@
         isFeed && $tar.removeClass('on');
       }, delay);
     }
-    $(window).on('scroll', scrollHandler);
-    $tar.on(sui.touch.type('end'), endHandler);
+    $(document).on('touchmove', scrollHandler);
+    $tar.on('touchend', endHandler);
 
     setTimeout(function () {
       isFeed = true;
