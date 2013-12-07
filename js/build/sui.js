@@ -627,6 +627,10 @@
     $tar.off(sui.touch.type('move'), scrollHandler);
     $tar.off(sui.touch.type('end'), endHandler);
 
+    if ($tar.data('noclick') == 'true') {
+      e.preventDefault();
+    }
+
     var isSroll = false;
     function scrollHandler (e) {
       $tar.off(sui.touch.type('move'), scrollHandler);
