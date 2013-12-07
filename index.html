@@ -1,27 +1,29 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-	<title>Bootstrap Demo</title>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<meta id="viewport" name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-	<meta name="MobileOptimized" content="320"/>
-	<meta name="format-detection" content="telephone=no">
-	<link rel="stylesheet" type="text/css" href="css/sui.css">
-	<script type="text/javascript" src="js/zepto.js"></script>
+    <title>Bootstrap Demo</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="MobileOptimized" content="320" />
+    <meta name="format-detection" content="telephone=no">
+    <link rel="stylesheet" type="text/css" href="css/sui.css">
+    <script type="text/javascript" src="js/zepto.js"></script>
 </head>
 <!--header-->
+
 <body>
+    <input class="sui-btn sui-btn-primary sui-mg-top sui-w-full" data-target="button.html" type="button" value="Button">
+    <input class="sui-btn sui-btn-primary sui-mg-top sui-w-full" data-target="input.html" type="button" value="Input Box">
+    <input class="sui-btn sui-btn-primary sui-mg-top sui-w-full" data-target="popbox.html" type="button" value="Pop Box">
+    <input class="sui-btn sui-btn-primary sui-mg-top sui-w-full" data-target="test.html" type="button" value="test">
+    <script type="text/javascript">
+    $('.sui-btn').on('click', function(e) {
+        window.location.href = ($(e.target).data('target'))
+    })
+    </script>
 
-	<input class="sui-btn sui-btn-primary sui-mg-top sui-w-full" data-target="button.html" type="button" value="Button">
-	<input class="sui-btn sui-btn-primary sui-mg-top sui-w-full" data-target="input.html" type="button" value="Input Box">
-	<input class="sui-btn sui-btn-primary sui-mg-top sui-w-full" data-target="popbox.html" type="button" value="Pop Box">
-	<input class="sui-btn sui-btn-primary sui-mg-top sui-w-full" data-target="test.html" type="button" value="test">
-	<script type="text/javascript">
-		$('.sui-btn').on('click', function (e) {
-			window.location.href = ($(e.target).data('target'))
-		})
-	</script>
-
-	<script type="text/javascript" src="js/build/sui.js"></script>
+    <script type="text/javascript" src="js/build/sui.js"></script>
 </body>
+
 </html>

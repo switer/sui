@@ -135,6 +135,12 @@
     //传递是够反馈的配置
     'isFeedback' : $(document.body).data('btnfeedback')
   })
+
+  $(document).on('touchstart .sui-btn', function (e) {
+    alert('touch start');
+    var $tar = $(e.target);
+    if (!$tar.hashClass('sui-btn')) return;
+  })
   /**
   * Button Event
   **/

@@ -1,20 +1,18 @@
-var fs = require('fs')
-	, UglifyJS = require("uglify-js")
-	, comment
-	, files = ['ui.button.js','ui.input.js','ui.popbox.js','ui.base.js','ui.extension.js']
-	, content = ""
-	, file
-	, cmbFilename = 'sui.js'
-	, miniFilename = 'sui.min.js'
-	, path = './js/'
-	, builddir = './js/build/'
-	, componentPath = './js/component/';
+var fs = require('fs'),
+    UglifyJS = require("uglify-js"),
+    comment, files = ['ui.button.js', 'ui.input.js', 'ui.popbox.js', 'ui.base.js', 'ui.extension.js'],
+    content = "",
+    file, cmbFilename = 'sui.js',
+    miniFilename = 'sui.min.js',
+    path = './js/',
+    builddir = './js/build/',
+    componentPath = './js/component/';
 
 for (var i = files.length - 1; i >= 0; i--) {
-	console.log('Build : ' + componentPath + files[i]);
-	comment = '\n/*' + files[i] + '*/\n'
-	file = fs.readFileSync(componentPath + files[i],'UTF-8');
-	content += ( comment  + file );
+    console.log('Build : ' + componentPath + files[i]);
+    comment = '\n/*' + files[i] + '*/\n'
+    file = fs.readFileSync(componentPath + files[i], 'UTF-8');
+    content += (comment + file);
 }
 fs.writeFileSync(builddir + cmbFilename, content, 'UTF-8');
 console.log('\nCombind File : ' + path + cmbFilename);
@@ -30,4 +28,3 @@ fs.writeFileSync(builddir + miniFilename, result.code, 'UTF-8');
 // indexArray[0] = layoutHeader;
 // console.log('Override html : ' + 'index.html');
 // fs.writeFileSync('index.html', indexArray.join('<!--header-->'), 'UTF-8');
-	 

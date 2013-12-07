@@ -24,13 +24,16 @@
   function _isEmpty(val) {
     return (val === undefined || val === null || val.length === 0);
   }
+  function _hasSetGloable(key) {
+    return $('body').data(key) === 'true';
+  }
   $.fn.initInp = function (value) {
     $(this).data('init', value).setInp(value);
   }
   // 用于输入控件的设值
   $.fn.setInp = function (value) {
     var $this = $(this);
-    if ($this.data('ctrl')) {
+    if (_hasSetGloable('ctrl') && $this.data('ctrl')) {
       //清除操作
       if (value === '') {
         $this.val('').data('value', '');
@@ -44,7 +47,7 @@
   }
   $.fn.getInp = function () {
     var $this = $(this);
-    if ($this.data('ctrl')) {
+    if (_hasSetGloable('ctrl') && $this.data('ctrl')) {
       return $this.data('value');
     } else {
       return $this.val();
@@ -80,7 +83,7 @@
     }
 
     /*是否为密码输入框控件*/
-    if ( $('body').data('ctrl') === 'true' && $tar.data('ctrl') === 'true' ) {
+    if ( _hasSetGloable('ctrl') && $tar.data('ctrl') === 'true' ) {
       /*保存初始值*/
       var oralValue = $tar.val();
       //清空值，标识为已经聚焦，在DOM上保存初始值

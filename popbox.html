@@ -1,132 +1,133 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-	<title>Bootstrap Demo</title>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<meta id="viewport" name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-	<meta name="MobileOptimized" content="320"/>
-	<meta name="format-detection" content="telephone=no">
-	<link rel="stylesheet" type="text/css" href="css/sui.css">
-	<script type="text/javascript" src="js/zepto.js"></script>
-	<style type="text/css">
-		.sui-btn {
-			position: relative;
-			z-index: 999;
-		}
-	</style>
+    <title>Bootstrap Demo</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="MobileOptimized" content="320" />
+    <meta name="format-detection" content="telephone=no">
+    <link rel="stylesheet" type="text/css" href="css/sui.css">
+    <script type="text/javascript" src="js/zepto.js"></script>
+    <style type="text/css">
+    .sui-btn {
+        position: relative;
+        z-index: 999;
+    }
+    </style>
 </head>
+
 <body style="background-color:red">
 
-	
-	<button class="sui-btn" data-height='auto'>body : auto</button>
-	<button class="sui-btn" data-height='500'>body : 500</button>
-	<button class="sui-btn" data-height='900'>body : 900</button>
-	<button class="sui-btn" data-height='1000'>body: 1000</button>
-	<button class="sui-btn" data-target='box1'>box1</button>
-	<button class="sui-btn" data-target='box2'>box2</button>
-	<button class="sui-btn" data-target='box3'>box3</button>
-	<button class="sui-btn" data-target='box4'>box4</button>
-	<button class="sui-btn" data-target='box5'>box5</button>
 
-	<!--case 1-->
-	<div class="sui-popbox sui-disp-none" data-position='fixed' data-transition=true data-cancel=true id="box1">
-		<div class="sui-popbox-mask"></div>
-		<div class="sui-popbox-box">
-			<div class="sui-popbox-content">
-				<div class="sui-mg-top">UC账号：123123123</div>
-				<div class="sui-inp-box sui-mg-top sui-inp-shadow-top">
-					<input class="sui-inp" type="text"  placeholder="6-20位数字" />
-				</div>
-				<input class="sui-btn sui-w-full sui-mg-top" type="button" value="注册">
-			</div>
-		</div>
-	</div>
-	<!--case 2-->
-	<div class="sui-popbox sui-disp-none" data-position='fixed' id="box2">
-		<div class="sui-popbox-mask"></div>
-		<div class="sui-popbox-box sui-mg-custom">
-			<div class="sui-popbox-title">title</div>
-			<div class="sui-popbox-content">
-				<div class="sui-mg-top">UC账号：123123123</div>
-				<div class="sui-inp-box sui-mg-top sui-inp-shadow-top">
-					<input class="sui-inp" type="text"  placeholder="6-20位数字" />
-				</div>
-				<input class="sui-btn sui-w-full sui-mg-top" type="button" value="注册">
-			</div>
-		</div>
-	</div>
-	<!--case 3-->
-	<div class="sui-popbox sui-disp-none" data-noscroll='true' data-center='true' id="box3">
-		<div class="sui-popbox-mask"></div>
-		<div class="sui-popbox-box sui-w-custom">
-			<div class="sui-popbox-content">
-				<center class="sui-mg-top">UC账号：123123123</center>
-				<div class="sui-inp-box sui-mg-top">
-					<input class="sui-inp" type="text"  placeholder="6-20位数字" />
-				</div>
-				<div class="sui-btn-group sui-mg-top">
-					<input class="sui-btn sui-btn-primary" id="hidebox3" type="button" value="登录">
-					<input class="sui-btn" type="button" value="注册">
-				</div>
-			</div>
-		</div>
-	</div>
-	<!--case 4-->
-	<div class="sui-popbox sui-disp-none" id="box4">
-		<div class="sui-popbox-mask"></div>
-		<div class="sui-popbox-box sui-w-custom sui-popbox-black" style="top:120px">
-			<div class="sui-popbox-content">
-				<br/>
-				<div>
-					<center>UC账号:11122233</center>
-					<center class="sui-mg-top">手机号:12312312312</center>
-					<center class="sui-mg-top">已成功绑定</center>
-				</div>
-				<input class="sui-btn sui-w-full sui-mg-top sui-btn-primary" type="button" value="注册">
-			</div>
-		</div>
-	</div>
-	<!--case 5-->
-	<div class="sui-popbox sui-disp-none" data-position='fixed' data-transition=true data-cancel=true id="box5">
-		<div class="sui-popbox-mask"></div>
-		<div class="sui-popbox-box">
-			<div class="sui-popbox-content">
-				<div class="sui-mg-top">UC账号：123123123</div>
-				<div class="sui-inp-box sui-mg-top">
-					<input class="sui-inp" type="text"  placeholder="6-20位数字" />
-				</div>
-				<input class="sui-btn sui-w-full sui-mg-top" id="hidebox5" type="button" value="注册">
-			</div>
-		</div>
-	</div>
-	<script type="text/javascript">
-		$('body').on('click.sui-btn', function (e) {
-			var tar = $(e.target).data('target');
-			if (!tar) return;
-				$tar = $("#" + tar);
-			if ($tar.hasClass('sui-disp-none')) {
-				$tar.showPopbox();
-			}
-			else $tar.suiHide('sui-disp-none');
-		})
-		$('body').on('click.sui-btn', function (e) {
-			var height = $(e.target).data('height');
-			if (!height) return;
-			$(document.body).css('height', height + 'px');
-		})
-		$('#hidebox3').on('click', function () {
-			$('#box3').delayHide();
-		});
-		$('#hidebox5').on('click', function () {
-			$('#box5').delayHide();
-		});
+    <button class="sui-btn" data-height='auto'>body : auto</button>
+    <button class="sui-btn" data-height='500'>body : 500</button>
+    <button class="sui-btn" data-height='900'>body : 900</button>
+    <button class="sui-btn" data-height='1000'>body: 1000</button>
+    <button class="sui-btn" data-target='box1'>box1</button>
+    <button class="sui-btn" data-target='box2'>box2</button>
+    <button class="sui-btn" data-target='box3'>box3</button>
+    <button class="sui-btn" data-target='box4'>box4</button>
+    <button class="sui-btn" data-target='box5'>box5</button>
 
-	</script>
+    <!--case 1-->
+    <div class="sui-popbox sui-disp-none" data-position='fixed' data-transition=true data-cancel=true id="box1">
+        <div class="sui-popbox-mask"></div>
+        <div class="sui-popbox-box">
+            <div class="sui-popbox-content">
+                <div class="sui-mg-top">UC账号：123123123</div>
+                <div class="sui-inp-box sui-mg-top sui-inp-shadow-top">
+                    <input class="sui-inp" type="text" placeholder="6-20位数字" />
+                </div>
+                <input class="sui-btn sui-w-full sui-mg-top" type="button" value="注册">
+            </div>
+        </div>
+    </div>
+    <!--case 2-->
+    <div class="sui-popbox sui-disp-none" data-position='fixed' id="box2">
+        <div class="sui-popbox-mask"></div>
+        <div class="sui-popbox-box sui-mg-custom">
+            <div class="sui-popbox-title">title</div>
+            <div class="sui-popbox-content">
+                <div class="sui-mg-top">UC账号：123123123</div>
+                <div class="sui-inp-box sui-mg-top sui-inp-shadow-top">
+                    <input class="sui-inp" type="text" placeholder="6-20位数字" />
+                </div>
+                <input class="sui-btn sui-w-full sui-mg-top" type="button" value="注册">
+            </div>
+        </div>
+    </div>
+    <!--case 3-->
+    <div class="sui-popbox sui-disp-none" data-noscroll='true' data-center='true' id="box3">
+        <div class="sui-popbox-mask"></div>
+        <div class="sui-popbox-box sui-w-custom">
+            <div class="sui-popbox-content">
+                <center class="sui-mg-top">UC账号：123123123</center>
+                <div class="sui-inp-box sui-mg-top">
+                    <input class="sui-inp" type="text" placeholder="6-20位数字" />
+                </div>
+                <div class="sui-btn-group sui-mg-top">
+                    <input class="sui-btn sui-btn-primary" id="hidebox3" type="button" value="登录">
+                    <input class="sui-btn" type="button" value="注册">
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--case 4-->
+    <div class="sui-popbox sui-disp-none" id="box4">
+        <div class="sui-popbox-mask"></div>
+        <div class="sui-popbox-box sui-w-custom sui-popbox-black" style="top:120px">
+            <div class="sui-popbox-content">
+                <br/>
+                <div>
+                    <center>UC账号:11122233</center>
+                    <center class="sui-mg-top">手机号:12312312312</center>
+                    <center class="sui-mg-top">已成功绑定</center>
+                </div>
+                <input class="sui-btn sui-w-full sui-mg-top sui-btn-primary" type="button" value="注册">
+            </div>
+        </div>
+    </div>
+    <!--case 5-->
+    <div class="sui-popbox sui-disp-none" data-position='fixed' data-transition=true data-cancel=true id="box5">
+        <div class="sui-popbox-mask"></div>
+        <div class="sui-popbox-box">
+            <div class="sui-popbox-content">
+                <div class="sui-mg-top">UC账号：123123123</div>
+                <div class="sui-inp-box sui-mg-top">
+                    <input class="sui-inp" type="text" placeholder="6-20位数字" />
+                </div>
+                <input class="sui-btn sui-w-full sui-mg-top" id="hidebox5" type="button" value="注册">
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+    $('body').on('click.sui-btn', function(e) {
+        var tar = $(e.target).data('target');
+        if (!tar) return;
+        $tar = $("#" + tar);
+        if ($tar.hasClass('sui-disp-none')) {
+            $tar.showPopbox();
+        } else $tar.suiHide('sui-disp-none');
+    })
+    $('body').on('click.sui-btn', function(e) {
+        var height = $(e.target).data('height');
+        if (!height) return;
+        $(document.body).css('height', height + 'px');
+    })
+    $('#hidebox3').on('click', function() {
+        $('#box3').delayHide();
+    });
+    $('#hidebox5').on('click', function() {
+        $('#box5').delayHide();
+    });
+    </script>
 
-	<script type="text/javascript" src="js/build/sui.js"></script>
-	<!-- 
+    <script type="text/javascript" src="js/build/sui.js"></script>
+    <!-- 
 	<script type="text/javascript" src="js/component/ui.input.js"></script>
 	<script type="text/javascript" src="js/component/ui.button.js"></script>
 	 -->
 </body>
+
 </html>
